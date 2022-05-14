@@ -1,0 +1,11 @@
+﻿-- Scaffolding  sql server  Cmd----
+Code Base Fist
+
+1) Enable-Migrations: Enables the migration in your project by creating a Configuration class.
+2) Add-Migration: Creates a new migration class as per specified name with the Up() and Down() methods.
+3) Update-Database: Executes the last migration file created by the Add-Migration command and applies changes to the database schema.
+
+Data Base  Fist
+
+ 1) Scaffold-DbContext "Server=.\SQLExpress;Database=SchoolDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
