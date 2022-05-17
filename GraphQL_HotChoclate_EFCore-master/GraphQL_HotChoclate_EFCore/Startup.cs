@@ -42,8 +42,16 @@ namespace GraphQL_HotChoclate_EFCore
             //                                                            .AddMutationType<Mutuation>()
             //                                                             .Create());
 
-            services.AddGraphQLServer().AddQueryType<PoUserServices>().AddFiltering().AddSorting();
-            
+
+
+
+            services.AddGraphQLServer().AddQueryType<PoUserServices>().AddFiltering().AddSorting().AddProjections();
+            services.AddTransient<poContext>();
+            services.AddTransient<PoUserServices>();
+            services.AddCors();
+            services.AddMvc();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +66,11 @@ namespace GraphQL_HotChoclate_EFCore
                     Path = "/playground"
                 });
             }
-
+            app.UseCors(builder => builder
+                 .AllowAnyOrigin()
+                 .AllowAnyMethod()
+                 .AllowAnyHeader());
+                        
 
 
             app.UseGraphiQLServer();

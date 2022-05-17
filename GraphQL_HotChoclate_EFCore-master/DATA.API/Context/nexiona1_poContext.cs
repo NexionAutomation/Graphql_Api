@@ -82,6 +82,9 @@ namespace GraphQl.DATA.API.PO.Model
         public virtual DbSet<VwOutstationExpenseComment> VwOutstationExpenseComments { get; set; }
         public virtual DbSet<VwOutstationExpenseComment1> VwOutstationExpenseComments1 { get; set; }
 
+        
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
