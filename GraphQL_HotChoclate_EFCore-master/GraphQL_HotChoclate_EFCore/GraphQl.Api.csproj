@@ -4,6 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>GraphQlApi</AssemblyName>
     <RootNamespace>GraphQl.Api</RootNamespace>
+    <UserSecretsId>0b763788-5dc2-4bad-a136-5a0a6d78641e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
