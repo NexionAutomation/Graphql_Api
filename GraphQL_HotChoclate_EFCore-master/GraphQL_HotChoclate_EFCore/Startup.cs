@@ -1,3 +1,4 @@
+using GraphQl.DATA.API.Models;
 using GraphQl.DATA.API.PO.Model;
 using GraphQL_HotChoclate_EFCore.GraphQL;
 using GraphQL_HotChoclate_EFCore.Models;
@@ -28,11 +29,12 @@ namespace GraphQL_HotChoclate_EFCore
         {
             Configuration = configuration;
         }
-       
+
         public void ConfigureServices(IServiceCollection services)
         {
             #region Connection String
-            services.AddDbContext<poContext>(item => item.UseSqlServer(Configuration.GetConnectionString("myconn")));
+            services.AddDbContext<poContext>(item => item.UseSqlServer(Configuration.GetConnectionString("PO")));
+            services.AddDbContext<crmContext>(item => item.UseSqlServer(Configuration.GetConnectionString("CRM")));
             #endregion
             //services.AddScoped<Query>();
             //services.AddScoped<Mutuation>();
@@ -45,9 +47,15 @@ namespace GraphQL_HotChoclate_EFCore
 
 
 
-            services.AddGraphQLServer().AddQueryType<PoUserServices>().AddFiltering().AddSorting().AddProjections();
+            services.AddGraphQLServer().AddQueryType<PoUserServices>(q=>q.Name("Query"))
+                                       .AddFiltering().AddSorting();
+                                  
+           
+            //services.AddGraphQLServer().AddQueryType<CRMUserServices>();
             services.AddTransient<poContext>();
+            services.AddTransient<crmContext>();
             services.AddTransient<PoUserServices>();
+            
             services.AddCors();
             services.AddMvc();
 
@@ -70,7 +78,7 @@ namespace GraphQL_HotChoclate_EFCore
                  .AllowAnyOrigin()
                  .AllowAnyMethod()
                  .AllowAnyHeader());
-                        
+
 
 
             app.UseGraphiQLServer();
