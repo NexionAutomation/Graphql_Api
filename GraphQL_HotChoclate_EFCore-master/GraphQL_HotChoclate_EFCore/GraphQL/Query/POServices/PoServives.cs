@@ -20,9 +20,9 @@ namespace GraphQL_HotChoclate_EFCore.Services
 {
     public partial class PoUserServices  //:IPOCRUD
     {
-        public readonly ILogger Logger;
-        public readonly ICRUD<ResponseData<TmUserMaster>, TmUserMaster> CURED;
-        public readonly poContext _poContext;
+        public readonly ILogger Logger12;
+        public readonly ICRUD<ResponseData<TmUserMaster>, TmUserMaster> CURED12;
+        public readonly poContext _poContext12;
 
 
 
@@ -922,6 +922,36 @@ namespace GraphQL_HotChoclate_EFCore.Services
             try
             {
                 List<VwOutstationExpenseComment1> tmUserMaster = context.VwOutstationExpenseComments1.ToList();
+                return Task.Run(() => tmUserMaster.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+        [UseFiltering]
+        [UseSorting]
+        public Task<IQueryable<CMAdminModuleMaster>> CMTmAdminModuleMasters([Service] poContext context)
+        {
+            try
+            {
+                List<CMAdminModuleMaster> tmUserMaster = context.CMAdminModuleMasters.ToList();
+                return Task.Run(() => tmUserMaster.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        [UseFiltering]
+        [UseSorting]
+        public Task<IQueryable<CMAdminSubModuleMaster>> CMTmAdminSubModuleMasters([Service] poContext context)
+        {
+            try
+            {
+                List<CMAdminSubModuleMaster> tmUserMaster = context.CMAdminSubModuleMasters.ToList();
                 return Task.Run(() => tmUserMaster.AsQueryable());
             }
             catch (Exception ex)

@@ -22,16 +22,16 @@ namespace GraphQL_HotChoclate_EFCore.Services
     {
         public readonly ILogger Logger;
         public readonly ICRUD<ResponseData<TmUserMaster>, TmUserMaster> CURED;
-        public readonly poContext _poContext;
+        public readonly poContext _poContextData;
 
 
-        
-        //public PoUserServices(ILogger<PoUserServices> logger)
-        //{
-        //    Logger = logger;
 
-        //    //CURED = cRUD;
-        //}
+        public PoUserServices(ILogger<PoUserServices> logger, poContext poContext2)
+        {
+            Logger = logger;
+
+            this._poContextData = poContext2;
+        }
 
         [UseFirstOrDefault]
         [UseFiltering(typeof(TmAdminModuleMaster))]
@@ -645,7 +645,7 @@ namespace GraphQL_HotChoclate_EFCore.Services
             try
             {
                 List<ResponseData<TmUserMaster>> responseDatas2 = new List<ResponseData<TmUserMaster>>();
-                List<TmUserMaster> tmUserMaster = Data.TmUserMasters.Select(a => a).ToList();
+                List<TmUserMaster> tmUserMaster = _poContextData.TmUserMasters.Select(a => a).ToList();
                 return Task.Run(() => tmUserMaster.AsQueryable());
             }
             catch (Exception ex)

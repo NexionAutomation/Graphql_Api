@@ -82,8 +82,9 @@ namespace GraphQl.DATA.API.PO.Model
         public virtual DbSet<VwOutstationExpenseComment> VwOutstationExpenseComments { get; set; }
         public virtual DbSet<VwOutstationExpenseComment1> VwOutstationExpenseComments1 { get; set; }
 
-        
 
+        public virtual DbSet<CMAdminSubModuleMaster> CMAdminSubModuleMasters { get; set; }
+        public virtual DbSet<CMAdminModuleMaster> CMAdminModuleMasters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -97,6 +98,79 @@ namespace GraphQl.DATA.API.PO.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+
+            //--------------------------------CUSTOM MODELS
+            modelBuilder.Entity<CMAdminModuleMaster>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("CM_AdminModuleMaster");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasColumnName("Creation_Date");
+
+                entity.Property(e => e.CuserId).HasColumnName("CUser_Id");
+
+                entity.Property(e => e.ModificationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasColumnName("Modification_Date");
+
+                entity.Property(e => e.ModuleId).HasColumnName("Module_Id");
+
+                entity.Property(e => e.ModuleName)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MuserId).HasColumnName("MUser_Id");
+
+                entity.Property(e => e.Rid)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("RID");
+            });
+
+            modelBuilder.Entity<CMAdminSubModuleMaster>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("CM_AdminSubModuleMaster");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasColumnName("Creation_Date");
+
+                entity.Property(e => e.CuserId).HasColumnName("CUser_Id");
+
+                entity.Property(e => e.ModificationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasColumnName("Modification_Date");
+
+                entity.Property(e => e.ModuleId).HasColumnName("Module_Id");
+
+                entity.Property(e => e.MuserId).HasColumnName("MUser_Id");
+
+                entity.Property(e => e.NavigationUrl)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Rid)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("RID");
+
+                entity.Property(e => e.SubModuleId).HasColumnName("SubModule_Id");
+
+                entity.Property(e => e.SubModuleName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
+
+            //---------------------------------END---------------------
+
+
+
 
             modelBuilder.Entity<Automumber>(entity =>
             {
