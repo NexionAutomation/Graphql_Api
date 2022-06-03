@@ -47,15 +47,15 @@ namespace GraphQL_HotChoclate_EFCore
 
 
 
-            services.AddGraphQLServer().AddQueryType<PoUserServices>(q=>q.Name("Query"))
-                                       .AddFiltering().AddSorting();
-                                  
-           
+            services.AddGraphQLServer().AddQueryType<PoUserServices>(q=>q.Name("Query")).AddFiltering().AddSorting();
+            services.AddGraphQLServer().AddMutationType<PoUserMutation>(q => q.Name("Mutuation"));
+
             //services.AddGraphQLServer().AddQueryType<CRMUserServices>();
             services.AddTransient<poContext>();
             services.AddTransient<crmContext>();
             services.AddTransient<PoUserServices>();
-            
+            services.AddTransient<PoUserMutation>();
+
             services.AddCors();
             services.AddMvc();
 
