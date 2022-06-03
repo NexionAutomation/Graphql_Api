@@ -132,7 +132,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<CMAdminSubModuleMaster>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("CM_AdminSubModuleMaster");
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -30,6 +31,7 @@ namespace GraphQl.DATA.API.PO.Model
         public int MuserId { get; set; }
         public int SubModuleOrder { get; set; }
         public string NavigationUrl { get; set; }
+        [Key]
         public int Rid { get; set; }
     }
 }
