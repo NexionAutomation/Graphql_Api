@@ -25,7 +25,10 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
         }
 
 
-        public async Task<IQueryable<ResponseData<string>>> CMTmAdminSubModuleMasters(ResponseData<CMAdminSubModuleMaster2> data, string triger)
+      
+
+
+        public async Task<IQueryable<ResponseData<string>>> CMTmAdminSubModuleMasters(ResponseData<CMAdminSubModuleMaster> data, string triger)
         {
 
             try
@@ -45,23 +48,27 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                            var data1 = (CMAdminSubModuleMaster2)data.Detail.SingleOrDefault();
+                            var data1 = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
                             CMAdminSubModuleMaster objCustomer = new CMAdminSubModuleMaster();
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
                             //objCustomer.moduleId,
+                            // objCustomer.Rid = data1.Rid;
+                            //objCustomer.MuserId = data1.MuserId;
+                            objCustomer.ModuleId = data1.ModuleId;//data1.CreationDate;
                             objCustomer.SubModuleId = data1.SubModuleId;
                             objCustomer.SubModuleName = data1.SubModuleName;
-                            objCustomer.CreationDate = DateTime.Now;//data1.CreationDate;
+                            objCustomer.CreationDate = DateTime.Now;
                             objCustomer.CuserId = data1.CuserId;
-                            objCustomer.ModificationDate = data1.ModificationDate;
+                            objCustomer.MuserId = data1.MuserId;
                             objCustomer.SubModuleOrder = data1.SubModuleOrder;
-                            objCustomer.NavigationUrl = data1.NavigationUrl;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            //objCustomer.Rid = data1.Rid;
                             //objCustomer.Rid = data1.Rid;
 
 
 
-                            _poContext12.CMAdminSubModuleMasters.Add(objCustomer);
+        _poContext12.CMAdminSubModuleMasters.Add(objCustomer);
                             await _poContext12.SaveChangesAsync();
 
 
@@ -94,19 +101,20 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                            var data1 = (CMAdminSubModuleMaster2)data.Detail.SingleOrDefault();
+                            var data1 = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
                             CMAdminSubModuleMaster objCustomer = new CMAdminSubModuleMaster();
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
                             //objCustomer.moduleId,
+                            objCustomer.ModuleId = data1.ModuleId;//data1.CreationDate;
                             objCustomer.SubModuleId = data1.SubModuleId;
                             objCustomer.SubModuleName = data1.SubModuleName;
-                            objCustomer.CreationDate = DateTime.Now;//data1.CreationDate;
+                            objCustomer.CreationDate = DateTime.Now;
                             objCustomer.CuserId = data1.CuserId;
-                            objCustomer.ModificationDate = data1.ModificationDate;
+                            objCustomer.MuserId = data1.MuserId;
                             objCustomer.SubModuleOrder = data1.SubModuleOrder;
-                            objCustomer.NavigationUrl = data1.NavigationUrl;
                             objCustomer.Rid = data1.Rid;
+
 
 
 
@@ -138,11 +146,11 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                    CMAdminSubModuleMaster objCustomer = new CMAdminSubModuleMaster();
+                    CMAdminModuleMaster objCustomer = new CMAdminModuleMaster();
 
                     objCustomer.Rid = Convert.ToInt32(data.ID);
 
-                    _poContext12.CMAdminSubModuleMasters.Remove(objCustomer);
+                    _poContext12.CMAdminModuleMasters.Remove(objCustomer);
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
@@ -168,7 +176,6 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
         }
-
 
 
         public async Task<IQueryable<ResponseData<string>>> CMTmAdminModuleMasters(ResponseData<CMAdminModuleMasterUser> data, string triger)
