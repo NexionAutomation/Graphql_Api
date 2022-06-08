@@ -63,12 +63,14 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.MuserId = data1.MuserId;
                             objCustomer.SubModuleOrder = data1.SubModuleOrder;
                             objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.TargetModule = data1.TargetModule;
+                            objCustomer.NavigationUrl = data1.NavigationUrl;
                             //objCustomer.Rid = data1.Rid;
                             //objCustomer.Rid = data1.Rid;
 
 
 
-        _poContext12.CMAdminSubModuleMasters.Add(objCustomer);
+                            _poContext12.CMAdminSubModuleMasters.Add(objCustomer);
                             await _poContext12.SaveChangesAsync();
 
 
@@ -114,6 +116,8 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.MuserId = data1.MuserId;
                             objCustomer.SubModuleOrder = data1.SubModuleOrder;
                             objCustomer.Rid = data1.Rid;
+                            objCustomer.TargetModule = data1.TargetModule;
+                            objCustomer.NavigationUrl = data1.NavigationUrl;
 
 
 

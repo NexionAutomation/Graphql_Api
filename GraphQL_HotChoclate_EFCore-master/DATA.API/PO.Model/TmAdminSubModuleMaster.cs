@@ -31,6 +31,7 @@ namespace GraphQl.DATA.API.PO.Model
         public int MuserId { get; set; }
         public int SubModuleOrder { get; set; }
         public string NavigationUrl { get; set; }
+        public string TargetModule { get; set; }
         [Key]
         public int Rid { get; set; }
     }
@@ -46,6 +47,7 @@ namespace GraphQl.DATA.API.PO.Model
         public int MuserId { get; set; }
         public int SubModuleOrder { get; set; }
         public string NavigationUrl { get; set; }
+        public string TargetModule { get; set; }
         [Key]
         public int Rid { get; set; }
     }
