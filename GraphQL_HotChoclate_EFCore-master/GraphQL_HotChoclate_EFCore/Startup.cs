@@ -6,6 +6,7 @@ using GraphQL_HotChoclate_EFCore.Services;
 using HotChocolate;
 using HotChocolate.AspNetCore;
 using HotChocolate.AspNetCore.Playground;
+using HotChocolate.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -48,8 +49,8 @@ namespace GraphQL_HotChoclate_EFCore
 
 
             services.AddGraphQLServer().AddQueryType<PoUserServices>(q=>q.Name("Query")).AddFiltering().AddSorting();
-            services.AddGraphQLServer().AddMutationType<PoUserMutation>(q => q.Name("Mutuation"));
-
+            services.AddGraphQLServer().AddMutationType<PoUserMutation>(q => q.Name("Mutuation")).AddType<UploadType>(); ;
+            
             //services.AddGraphQLServer().AddQueryType<CRMUserServices>();
             services.AddTransient<poContext>();
             services.AddTransient<crmContext>();
@@ -80,7 +81,7 @@ namespace GraphQL_HotChoclate_EFCore
                  .AllowAnyHeader());
 
 
-
+          
             app.UseGraphiQLServer();
             //app.UseRouting();
 

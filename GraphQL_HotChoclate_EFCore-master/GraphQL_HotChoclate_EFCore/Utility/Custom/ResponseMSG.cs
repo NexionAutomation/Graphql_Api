@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HotChocolate;
+using HotChocolate.Types;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -21,5 +23,11 @@ namespace GraphQl.Api.Utility.Custom
         }
 
        
+    }
+
+    public class ExampleInput
+    {
+        [GraphQLType(typeof(NonNullType<UploadType>))]
+        public IFile File { get; set; }
     }
 }

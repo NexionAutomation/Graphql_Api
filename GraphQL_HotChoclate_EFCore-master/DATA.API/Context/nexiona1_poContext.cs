@@ -100,7 +100,7 @@ namespace GraphQl.DATA.API.PO.Model
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
 
-            //--------------------------------CUSTOM MODELS
+            //--------------------------------CUSTOM MODELS ---CMWebUserRightsMaster
             modelBuilder.Entity<CMAdminModuleMaster>(entity =>
             {
                // entity.HasNoKey();
