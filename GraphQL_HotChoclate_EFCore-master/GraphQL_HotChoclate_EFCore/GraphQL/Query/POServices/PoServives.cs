@@ -962,6 +962,24 @@ namespace GraphQL_HotChoclate_EFCore.Services
 
 
 
+        [UseFiltering]
+        [UseSorting]
+        public Task<IQueryable<CMWebUserRightsMaster>> CMWebUserRightsMaster([Service] poContext context)
+        {
+            try
+            {
+                List<CMWebUserRightsMaster> tmUserMaster = context.CMWebUserRightsMasters.ToList();
+                return Task.Run(() => tmUserMaster.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+
+
 
     }
 }

@@ -84,7 +84,9 @@ namespace GraphQl.DATA.API.PO.Model
 
 
         public virtual DbSet<CMAdminSubModuleMaster> CMAdminSubModuleMasters { get; set; }
+        public virtual DbSet<CMWebUserRightsMaster> CMWebUserRightsMasters { get; set; }
         public virtual DbSet<CMAdminModuleMaster> CMAdminModuleMasters { get; set; }
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -165,6 +167,40 @@ namespace GraphQl.DATA.API.PO.Model
                     .HasMaxLength(100)
                     .IsUnicode(false);
             });
+
+
+            modelBuilder.Entity<CMWebUserRightsMaster>(entity =>
+            {
+               // entity.HasNoKey();
+
+                entity.ToTable("CM_Web_UserRightsMaster");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasColumnName("Creation_Date");
+
+                entity.Property(e => e.CuserId).HasColumnName("CUser_Id");
+
+                entity.Property(e => e.GroupId).HasColumnName("Group_Id");
+
+                entity.Property(e => e.ModificationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasColumnName("Modification_Date");
+
+                entity.Property(e => e.ModuleId).HasColumnName("Module_Id");
+
+                entity.Property(e => e.MuserId).HasColumnName("MUser_Id");
+
+                entity.Property(e => e.Rid)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("RID");
+
+                entity.Property(e => e.SubModuleId).HasColumnName("SubModule_Id");
+
+                entity.Property(e => e.UserCode).HasColumnName("User_Code");
+            });
+
+
 
 
             //---------------------------------END---------------------

@@ -336,7 +336,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-        public async Task<IQueryable<ResponseData<string>>> CMWebUserRights(ResponseData<CMAdminModuleMasterUser> data, string triger)
+        public async Task<IQueryable<ResponseData<string>>> CMWebUserRights(ResponseData<CMWebUserRightsMaster> data, string triger)
         {
 
             try
@@ -364,24 +364,33 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                            var data1 = (CMAdminModuleMasterUser)data.Detail.SingleOrDefault();
-                            CMAdminModuleMaster objCustomer = new CMAdminModuleMaster();
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
-                            //objCustomer.moduleId,
-                            // objCustomer.Rid = data1.Rid;
-                            //objCustomer.MuserId = data1.MuserId;
-                            objCustomer.ModuleOrder = data1.ModuleOrder;//data1.CreationDate;
-                            objCustomer.ModuleName = data1.ModuleName;
-                            objCustomer.ModificationDate = DateTime.Now;
-                            objCustomer.ModuleId = data1.ModuleId;
-                            objCustomer.CreationDate = DateTime.Now;
+                           
+
+                            objCustomer.GroupId= data1.GroupId;
+                            objCustomer.ModuleId= data1.ModuleId;
+                            objCustomer.SubModuleId= data1.SubModuleId;
+                            objCustomer.CanView= data1.CanView;
+                            objCustomer.CanSave= data1.CanSave;
+                            objCustomer.CanSearch= data1.CanSearch;
+                            objCustomer.CanUpdate= data1.CanUpdate;
+                            objCustomer.CanDelete= data1.CanDelete;
                             objCustomer.CuserId = data1.CuserId;
-                            //objCustomer.Rid = data1.Rid;
+                            objCustomer.MuserId= data1.MuserId;
+                            objCustomer.UserCode= data1.UserCode;
+                            objCustomer.CanExport= data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate= DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
 
 
 
-                            _poContext12.CMAdminModuleMasters.Add(objCustomer);
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
                             await _poContext12.SaveChangesAsync();
 
 
@@ -414,24 +423,29 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                            var data1 = (CMAdminModuleMasterUser)data.Detail.SingleOrDefault();
-                            CMAdminModuleMaster objCustomer = new CMAdminModuleMaster();
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
-                            //objCustomer.moduleId,
-                            objCustomer.Rid = data1.Rid;
-                            objCustomer.MuserId = data1.MuserId;
-                            objCustomer.ModuleOrder = data1.ModuleOrder;//data1.CreationDate;
-                            objCustomer.ModuleName = data1.ModuleName;
-                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.GroupId = data1.GroupId;
                             objCustomer.ModuleId = data1.ModuleId;
-                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
                             objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                           objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid= data1.Rid;
 
 
 
-
-                            _poContext12.CMAdminModuleMasters.Update(objCustomer);
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
                             _poContext12.SaveChanges();
 
 
@@ -459,11 +473,11 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                    CMAdminModuleMaster objCustomer = new CMAdminModuleMaster();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
 
                     objCustomer.Rid = Convert.ToInt32(data.ID);
 
-                    _poContext12.CMAdminModuleMasters.Remove(objCustomer);
+                    _poContext12.CMWebUserRightsMasters.Remove(objCustomer);
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
