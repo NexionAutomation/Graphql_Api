@@ -471,13 +471,376 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                 else if (triger == "DELETE")
                 {
 
-
-
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                  
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
                     CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
 
-                    objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
 
-                    _poContext12.CMWebUserRightsMasters.Remove(objCustomer);
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+                       
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+                    
+                    });
+                   await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        }
+
+
+        #region "Module Start"
+        //-------------------------------------------------------Modules Start------------------------------------------------///
+
+        public async Task<IQueryable<ResponseData<string>>> CMCountryMaster(ResponseData<CMWebUserRightsMaster> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
+
+
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid = data1.Rid;
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
+
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+
+                    });
+                    await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        }
+        public async Task<IQueryable<ResponseData<string>>> CMCityMaster(ResponseData<CMWebUserRightsMaster> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
+
+
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid = data1.Rid;
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
+
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+
+                    });
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
@@ -504,6 +867,1243 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
         }
 
+        public async Task<IQueryable<ResponseData<string>>> CMCompanyMaster(ResponseData<CMWebUserRightsMaster> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
+
+
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid = data1.Rid;
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
+
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+
+                    });
+                    await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        }
+
+        public async Task<IQueryable<ResponseData<string>>> CMExpenseGroupMaster(ResponseData<CMWebUserRightsMaster> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
+
+
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid = data1.Rid;
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
+
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+
+                    });
+                    await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        }
+
+        public async Task<IQueryable<ResponseData<string>>> CMExpenseStatusMaster(ResponseData<CMWebUserRightsMaster> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
+
+
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid = data1.Rid;
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
+
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+
+                    });
+                    await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        }
+
+
+        public async Task<IQueryable<ResponseData<string>>> CMExpenseTypeMaster(ResponseData<CMWebUserRightsMaster> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
+
+
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid = data1.Rid;
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
+
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+
+                    });
+                    await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        }
+
+
+        public async Task<IQueryable<ResponseData<string>>> CMFinanceYearMaster(ResponseData<CMWebUserRightsMaster> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
+
+
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid = data1.Rid;
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
+
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+
+                    });
+                    await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        }
+
+        public async Task<IQueryable<ResponseData<string>>> CMStateMasterMaster(ResponseData<CMWebUserRightsMaster> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
+
+
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid = data1.Rid;
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
+
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+
+                    });
+                    await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        }
+
+        public async Task<IQueryable<ResponseData<string>>> CMSupplierMaster(ResponseData<CMWebUserRightsMaster> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            // objCustomer.Rid= data1.Rid;
+
+
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+                            CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.ModificationDate = DateTime.Now;
+                            objCustomer.Rid = data1.Rid;
+
+
+
+                            _poContext12.CMWebUserRightsMasters.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
+
+                    var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
+                                                 && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
+                    CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
+
+                    //objCustomer.Rid = Convert.ToInt32(data.ID);
+                    //objCustomer.Rid = 0;
+
+                    delobj.ForEach(ele => {
+                        List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
+
+                        _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
+
+                    });
+                    await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        }
+
+        //--------------------------------------------------------End Modules----------------------------------------------//
+        #endregion
+        //---------------------------------------------------File Uplode ------------------------------------------//
         public async Task<IQueryable<ResponseData<string>>> UploadFileAsync(IFile files)
         {
             try
@@ -561,6 +2161,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
         }
 
+        //--------------------------------------------------- End File Uplode ------------------------------------------//
         //public async Task<bool> UploadFileAsync(IFile file)
         //{
         //    //var fileName = file.Name;

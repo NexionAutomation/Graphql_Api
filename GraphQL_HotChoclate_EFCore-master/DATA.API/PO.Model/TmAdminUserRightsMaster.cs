@@ -62,6 +62,7 @@ namespace GraphQl.DATA.API.PO.Model
         public int CuserId { get; set; }
         public DateTime ModificationDate { get; set; }
         public int MuserId { get; set; }
+       
         public int UserCode { get; set; }
         public bool CanExport { get; set; }
         [Key]

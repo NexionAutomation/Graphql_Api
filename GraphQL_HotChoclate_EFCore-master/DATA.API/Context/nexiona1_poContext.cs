@@ -17,6 +17,8 @@ namespace GraphQl.DATA.API.PO.Model
         {
         }
 
+
+       
         public virtual DbSet<Automumber> Automumbers { get; set; }
         public virtual DbSet<Automumber1> Automumbers1 { get; set; }
         public virtual DbSet<ChartstempTable> ChartstempTables { get; set; }
