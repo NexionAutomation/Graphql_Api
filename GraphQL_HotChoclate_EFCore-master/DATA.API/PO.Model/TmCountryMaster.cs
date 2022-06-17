@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
 namespace GraphQl.DATA.API.PO.Model
 {
+    
     public partial class TmCountryMaster
     {
+       [Key]
         public int Countrycode { get; set; }
         public string Countryname { get; set; }
         public string DisplayAs { get; set; }

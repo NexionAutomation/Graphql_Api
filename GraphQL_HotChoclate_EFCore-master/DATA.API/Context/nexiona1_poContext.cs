@@ -408,7 +408,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<ExpenseStatusMaster>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("ExpenseStatusMaster");
 
@@ -444,7 +444,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<ExpenseType>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
@@ -1289,7 +1289,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<TmCityMaster>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("TM_CityMaster");
 
@@ -1324,7 +1324,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<TmCompanyMaster>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("TM_CompanyMaster");
 
@@ -1466,7 +1466,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<TmCountryMaster>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("TM_CountryMaster");
 
@@ -1522,7 +1522,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<TmFinaicalYear>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("TM_FinaicalYear");
 
@@ -1552,7 +1552,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<TmGroupMaster>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("Tm_GroupMaster");
 
@@ -1683,7 +1683,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<TmStateMaster>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("TM_StateMaster");
 
@@ -1723,7 +1723,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<TmSupplierMaster>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("Tm_supplierMaster");
 

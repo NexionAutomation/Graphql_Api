@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -7,6 +8,8 @@ namespace GraphQl.DATA.API.PO.Model
 {
     public partial class TmStateMaster
     {
+
+        [Key]
         public int Statecode { get; set; }
         public string Statename { get; set; }
         public string DisplayAs { get; set; }

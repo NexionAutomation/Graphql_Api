@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -7,6 +8,7 @@ namespace GraphQl.DATA.API.PO.Model
 {
     public partial class ExpenseType
     {
+        [Key]
         public long ExpenseTypeId { get; set; }
         public string TypeName { get; set; }
         public long? EgroupId { get; set; }
