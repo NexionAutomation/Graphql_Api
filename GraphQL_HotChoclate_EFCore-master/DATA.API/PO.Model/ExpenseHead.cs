@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -7,6 +8,7 @@ namespace GraphQl.DATA.API.PO.Model
 {
     public partial class ExpenseHead
     {
+        [Key]
         public long ExpenseId { get; set; }
         public string Title { get; set; }
         public DateTime? PeriodForm { get; set; }

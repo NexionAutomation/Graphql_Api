@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -14,6 +15,7 @@ namespace GraphQl.DATA.API.PO.Model
         public DateTime? UpdateOn { get; set; }
         public int? UpdateBy { get; set; }
         public string Comments { get; set; }
+        [Key]
         public long Rid { get; set; }
     }
 }

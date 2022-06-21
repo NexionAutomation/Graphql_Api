@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -21,6 +22,7 @@ namespace GraphQl.DATA.API.PO.Model
         public double? Distance { get; set; }
         public double? ParkingAmt { get; set; }
         public double? Amt { get; set; }
+        [Key]
         public long ExpenseItemsId { get; set; }
     }
 }

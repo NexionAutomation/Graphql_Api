@@ -272,7 +272,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<ExpenseHead>(entity =>
             {
-                entity.HasNoKey();
+               // entity.HasNoKey();
 
                 entity.ToTable("ExpenseHead");
 
@@ -299,7 +299,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<ExpenseItem>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.Property(e => e.Amt).HasColumnName("AMt");
 
@@ -324,7 +324,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<ExpenseItemAttachment>(entity =>
             {
-                entity.HasNoKey();
+               // entity.HasNoKey();
 
                 entity.ToTable("ExpenseItemAttachment");
 
@@ -336,7 +336,7 @@ namespace GraphQl.DATA.API.PO.Model
 
                 entity.Property(e => e.CreatedOn).HasColumnType("smalldatetime");
 
-                entity.Property(e => e.Data).IsRequired();
+                //entity.Property(e => e.Data).IsRequired();
 
                 entity.Property(e => e.ExpenseId).HasColumnName("ExpenseID");
 
@@ -425,7 +425,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<ExpenseStatusState>(entity =>
             {
-                entity.HasNoKey();
+               // entity.HasNoKey();
 
                 entity.ToTable("ExpenseStatusState");
 
@@ -1580,7 +1580,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<TmPurchaseBody>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("TM_PurchaseBody");
 
@@ -1622,7 +1622,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<TmPurchaseHead>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("TM_PurchaseHead");
 

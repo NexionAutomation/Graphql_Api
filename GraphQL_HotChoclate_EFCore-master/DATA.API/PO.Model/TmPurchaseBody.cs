@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -19,6 +20,7 @@ namespace GraphQl.DATA.API.PO.Model
         public int? CuserId { get; set; }
         public DateTime? ModificationDate { get; set; }
         public int? MuserId { get; set; }
+        [Key]
         public decimal Id { get; set; }
         public string Catname { get; set; }
     }

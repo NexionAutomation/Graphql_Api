@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -7,6 +8,7 @@ namespace GraphQl.DATA.API.PO.Model
 {
     public partial class TmPurchaseHead
     {
+        [Key]
         public int? PoId { get; set; }
         public int? CompanyId { get; set; }
         public int? SupplierId { get; set; }
