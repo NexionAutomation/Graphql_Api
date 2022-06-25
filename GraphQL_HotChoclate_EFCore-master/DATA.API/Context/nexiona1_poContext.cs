@@ -63,6 +63,7 @@ namespace GraphQl.DATA.API.PO.Model
         public virtual DbSet<TmGroupMaster> TmGroupMasters { get; set; }
         public virtual DbSet<TmPurchaseBody> TmPurchaseBodies { get; set; }
         public virtual DbSet<TmPurchaseHead> TmPurchaseHeads { get; set; }
+        public virtual DbSet<TmPurchaseHead2> TmPurchaseHeads2 { get; set; }
         public virtual DbSet<TmStateMaster> TmStateMasters { get; set; }
         public virtual DbSet<TmSupplierMaster> TmSupplierMasters { get; set; }
         public virtual DbSet<TmUserMaster> TmUserMasters { get; set; }
@@ -1625,6 +1626,67 @@ namespace GraphQl.DATA.API.PO.Model
                 //entity.HasNoKey();
 
                 entity.ToTable("TM_PurchaseHead");
+
+                entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasColumnName("Creation_Date");
+
+                entity.Property(e => e.CuserId).HasColumnName("CUser_Id");
+
+                entity.Property(e => e.DeliveryDate).HasColumnType("date");
+
+                entity.Property(e => e.DeliveryMode)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Enduser)
+                    .HasMaxLength(350)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FreightTerms)
+                    .HasMaxLength(350)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Gst)
+                    .HasMaxLength(350)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.IndentNo)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ModificationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasColumnName("Modification_Date");
+
+                entity.Property(e => e.MuserId).HasColumnName("MUser_Id");
+
+                entity.Property(e => e.OrderDate).HasColumnType("date");
+
+                entity.Property(e => e.PaymentTerms)
+                    .HasMaxLength(350)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PoId).HasColumnName("PO_Id");
+
+                entity.Property(e => e.Remarks).IsUnicode(false);
+
+                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
+
+                entity.Property(e => e.WorkOrderNo)
+                    .HasMaxLength(350)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TmPurchaseHead2>(entity =>
+            {
+                //entity.HasNoKey();
+
+                entity.ToTable("vv_PurchaseHead2");
 
                 entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
 

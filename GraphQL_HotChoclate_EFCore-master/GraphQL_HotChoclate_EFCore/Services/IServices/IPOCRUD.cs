@@ -52,6 +52,7 @@ namespace GraphQl.Api.Services
         Task<IQueryable<ResponseData<TmGroupMaster>>> GroupMasterData(poContext Data);
         Task<IQueryable<ResponseData<TmPurchaseBody>>> PurchaseBodyData(poContext Data);
         Task<IQueryable<ResponseData<TmPurchaseHead>>> PurchaseHeadData(poContext Data);
+        Task<IQueryable<ResponseData<TmPurchaseHead2>>> PurchaseHeadData2(poContext Data);
         Task<IQueryable<ResponseData<TmStateMaster>>> StateMasterData(poContext Data);
         Task<IQueryable<ResponseData<TmSupplierMaster>>> SupplierMasterData(poContext Data);
         Task<IQueryable<ResponseData<TmUserMaster>>> UserMasterData(poContext Data);

@@ -8,6 +8,7 @@ using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Resolvers;
 using HotChocolate.Types;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -969,6 +970,28 @@ namespace GraphQL_HotChoclate_EFCore.Services
             try
             {
                 List<CMWebUserRightsMaster> tmUserMaster = context.CMWebUserRightsMasters.ToList();
+                return Task.Run(() => tmUserMaster.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+
+        [UseFiltering]
+        [UseSorting]
+        public Task<IQueryable<TmPurchaseHead2>> CMPOFetchdata([Service] poContext context)
+        {
+            try
+            {
+                
+
+                List<TmPurchaseHead2> tmUserMaster = context.TmPurchaseHeads2.OrderByDescending(x=>x.PoId).ToList();
+
+
+               
                 return Task.Run(() => tmUserMaster.AsQueryable());
             }
             catch (Exception ex)

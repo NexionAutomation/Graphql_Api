@@ -117,6 +117,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.SubModuleId = data1.SubModuleId;
                             objCustomer.SubModuleName = data1.SubModuleName;
                             objCustomer.CreationDate = DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
                             objCustomer.CuserId = data1.CuserId;
                             objCustomer.MuserId = data1.MuserId;
                             objCustomer.SubModuleOrder = data1.SubModuleOrder;
@@ -155,11 +156,11 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                    CMAdminModuleMaster objCustomer = new CMAdminModuleMaster();
+                    CMAdminSubModuleMaster objCustomer = new CMAdminSubModuleMaster();
 
                     objCustomer.Rid = Convert.ToInt32(data.ID);
 
-                    _poContext12.CMAdminModuleMasters.Remove(objCustomer);
+                    _poContext12.CMAdminSubModuleMasters.Remove(objCustomer);
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
