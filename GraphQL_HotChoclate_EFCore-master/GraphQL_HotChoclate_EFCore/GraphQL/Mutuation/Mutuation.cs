@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -672,7 +673,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
         }   // ok
-        public async Task<IQueryable<ResponseData<string>>> CMExpenseGroupMaster(ResponseData<TmGroupMaster> data, string triger)
+        public async Task<IQueryable<ResponseData<string>>> CMExpenseGroupMaster(ResponseData<ExpenseGroup> data, string triger)
         {
 
             try
@@ -691,24 +692,23 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                            
 
 
-                            var data1 = (TmGroupMaster)data.Detail.SingleOrDefault();
-                            TmGroupMaster objCustomer = new TmGroupMaster();
+                            var data1 = (ExpenseGroup)data.Detail.SingleOrDefault();
+                            ExpenseGroup objCustomer = new ExpenseGroup();
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
-                            objCustomer.Rid = _poContext12.TmGroupMasters.Select(x => x.Rid).Max() + 1 ;
-                            objCustomer.GroupId = data1.GroupId;
-                            objCustomer.GroupName = data1.GroupName;
-                            objCustomer.CreationDate = DateTime.Now;
-                            objCustomer.CuserId = data1.CuserId;
-                            objCustomer.ModificationDate = DateTime.Now;
-                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.EgroupName = data1.EgroupName;
+                            objCustomer.CreatedOn = DateTime.Now;
+                            objCustomer.CreatedBy = data1.CreatedBy;
+                            objCustomer.UpdateOn = DateTime.Now;
+                            objCustomer.UpdateBy = data1.UpdateBy;
+                            objCustomer.EgroupId = data1.EgroupId;
                             // objCustomer.Rid= data1.Rid;
 
 
 
 
 
-                            _poContext12.TmGroupMasters.Add(objCustomer);
+                            _poContext12.ExpenseGroups.Add(objCustomer);
                             await _poContext12.SaveChangesAsync();
 
 
@@ -741,21 +741,25 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                            var data1 = (TmGroupMaster)data.Detail.SingleOrDefault();
-                            TmGroupMaster objCustomer = new TmGroupMaster();
+                            var data1 = (ExpenseGroup)data.Detail.SingleOrDefault();
+                            ExpenseGroup objCustomer = new ExpenseGroup();
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
-                            objCustomer.Rid = data1.Rid;
-                            objCustomer.GroupId = data1.GroupId;
-                            objCustomer.GroupName = data1.GroupName;
-                            objCustomer.CreationDate = data1.CreationDate;
-                            objCustomer.CuserId = data1.CuserId;
-                            objCustomer.ModificationDate = DateTime.Now;
-                            objCustomer.MuserId = data1.MuserId;
+                         
+
+                            objCustomer.EgroupName = data1.EgroupName;
+                            objCustomer.CreatedOn = DateTime.Now;
+                            objCustomer.CreatedBy = data1.CreatedBy;
+                            objCustomer.UpdateOn = DateTime.Now;
+                            objCustomer.UpdateBy = data1.UpdateBy;
+                            objCustomer.EgroupId = data1.EgroupId;
 
 
 
-                            _poContext12.TmGroupMasters.Update(objCustomer);
+
+
+
+        _poContext12.ExpenseGroups.Update(objCustomer);
                             _poContext12.SaveChanges();
 
 
@@ -781,15 +785,15 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                 else if (triger == "DELETE")
                 {
 
-                    var data1 = (TmGroupMaster)data.Detail.SingleOrDefault();
+                    var data1 = (ExpenseGroup)data.Detail.SingleOrDefault();
 
-                    
-                    TmGroupMaster objCustomer = new TmGroupMaster();
 
-                    objCustomer.Rid = Convert.ToInt32(data.ID);
+                    ExpenseGroup objCustomer = new ExpenseGroup();
+
+                    objCustomer.EgroupId = Convert.ToInt32(data.ID);
                   //  objCustomer.Rid = 0;
 
-                        _poContext12.TmGroupMasters.Remove(objCustomer);
+                        _poContext12.ExpenseGroups.Remove(objCustomer);
 
                     
                     await _poContext12.SaveChangesAsync();
@@ -1962,11 +1966,23 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
             {
 
 
+
+                //WebRequest request = WebRequest.Create(host + path);
+                //request.Method = WebRequestMethods.Ftp.MakeDirectory;
+                //request.Credentials = new NetworkCredential(UserId, Password);
+                //using (var resp = (FtpWebResponse)request.GetResponse())
+                //{
+                //    Console.WriteLine(resp.StatusCode);
+                //}
+
+
                 await using var stream = files.OpenReadStream();
 
-                var streamWriter = new FileStream("./test.zip", FileMode.OpenOrCreate);
+                var streamWriter = new FileStream("./" + DateTime.Now.ToString("ddMMyyyyhhmmss")+".pdf", FileMode.OpenOrCreate);
 
                 await stream.CopyToAsync(streamWriter);
+
+                stream.Close();
 
                 //  GlobalData.me.CoverPhotoLength = stream.Length;
 
@@ -2022,6 +2038,11 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                 ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
                 responseDatas2.Add(dat);
                 return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+            finally
+            {
+
             }
 
         }
@@ -2510,12 +2531,18 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
         } //ok
 
-        public async Task<IQueryable<ResponseData<string>>> CMExpenseItemAttachment07(ResponseData<ExpenseItemAttachment07> data, string triger)
+        public async Task<IQueryable<ResponseData<string>>> CMExpenseItemAttachment07(ResponseData<ExpenseItemAttachment07> data, string triger,IFile file)
         {
 
             try
             {
 
+
+                await using var stream = file.OpenReadStream();
+
+                var streamWriter = new FileStream("./test.zip", FileMode.OpenOrCreate);
+
+                await stream.CopyToAsync(streamWriter);
 
 
                 List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();

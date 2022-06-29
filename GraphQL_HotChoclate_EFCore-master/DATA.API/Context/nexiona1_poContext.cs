@@ -253,7 +253,7 @@ namespace GraphQl.DATA.API.PO.Model
 
             modelBuilder.Entity<ExpenseGroup>(entity =>
             {
-                entity.HasNoKey();
+               // entity.HasNoKey();
 
                 entity.ToTable("ExpenseGroup");
 
