@@ -138,7 +138,7 @@ namespace GraphQL_HotChoclate_EFCore.Services
         {
             try
             {
-                List<ExpenseItemAttachment> tmUserMaster = context.ExpenseItemAttachments.ToList();
+                List<ExpenseItemAttachment> tmUserMaster = context.ExpenseItemAttachments.OrderByDescending(x=>x.AttchmentId).ToList();
                 return Task.Run(() => tmUserMaster.AsQueryable());
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
-﻿using GraphQl.Api.Services.IServices;
+﻿using ExcelDataReader;
+using GraphQl.Api.Services.IServices;
 using GraphQl.Api.Utility;
 using GraphQl.Api.Utility.Custom;
 using GraphQl.DATA.API.PO.Model;
@@ -11,6 +12,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -2538,11 +2541,38 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
             {
 
 
+                //await using var stream = file.OpenReadStream();
+
+                //var streamWriter = new FileStream("./test.zip", FileMode.OpenOrCreate);
+
+                //await stream.CopyToAsync(streamWriter);
+
+
+                
+
+                var filename = file.Name;
+                var dir = "";
+                var ext = Path.GetExtension(filename);
                 await using var stream = file.OpenReadStream();
 
-                var streamWriter = new FileStream("./test.zip", FileMode.OpenOrCreate);
+                var FILENAME = DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
+                var streamWriter = new FileStream("FilesData/" + FILENAME, FileMode.OpenOrCreate);
+
+                string From = streamWriter.Name;
+
 
                 await stream.CopyToAsync(streamWriter);
+
+                streamWriter.Close();
+
+                string To = "ftp://182.50.132.58/FileData/" + FILENAME;
+
+                using (var client = new WebClient())
+                {
+                    client.Credentials = new NetworkCredential("App", "Nexion@123");
+                    client.UploadFile(To, WebRequestMethods.Ftp.UploadFile, From);
+
+                }
 
 
                 List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
@@ -2560,8 +2590,8 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
                             objCustomer.ExpenseId = data1.ExpenseId;
-     objCustomer.Name = data1.Name;
-       objCustomer.ContentType = data1.ContentType;
+     objCustomer.Name = FILENAME;
+       objCustomer.ContentType = ext;
                            // objCustomer.Data =
       objCustomer.ImagDescription = data1.ImagDescription;
         objCustomer.CreatedBy = data1.CreatedBy;
@@ -2589,6 +2619,29 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
                             dbContextTransaction1.Commit();
+
+
+
+                          
+
+                            //dir = "./"+;
+
+                      
+
+                            
+
+
+
+                            //@"D:\PO.xlsx";//streamWriter.Name;
+                            //string To = "ftp://199.102.48.4/"+ DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
+                           
+
+
+
+
+
+
+
                             ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
                             responseDatas2.Add(dat12);
                             return await Task.Run(() => responseDatas2.AsQueryable());
@@ -3037,6 +3090,205 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
         } //ok
 
         //------------------------------------------------------End Po---------------------------------------------
+
+
+
+        //---------------------------------------------------File Uplode ------------------------------------------//
+        public async Task<IQueryable<ResponseData<string>>> UploadFileExcel(IFile files)
+        {
+            try
+            {
+
+
+
+
+
+
+                //WebRequest request = WebRequest.Create(host + path);
+                //request.Method = WebRequestMethods.Ftp.MakeDirectory;
+                //request.Credentials = new NetworkCredential(UserId, Password);
+                //using (var resp = (FtpWebResponse)request.GetResponse())
+                //{
+                //    Console.WriteLine(resp.StatusCode);
+                //}
+
+               
+                var filename= files.Name;
+                var dir = "";
+                var ext=Path.GetExtension(filename);
+                await using var stream = files.OpenReadStream();
+        
+
+                var streamWriter = new FileStream("FilesData/" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ext, FileMode.OpenOrCreate);
+
+                string From = streamWriter.Name;
+                
+                //dir = "./"+;
+
+                await stream.CopyToAsync(streamWriter);
+
+                streamWriter.Close();
+
+
+
+                //@"D:\PO.xlsx";//streamWriter.Name;
+                //string To = "ftp://199.102.48.4/"+ DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
+                string To = "ftp://182.50.132.58/FileData/" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
+
+                using (var client = new WebClient())
+                    {
+                        client.Credentials = new NetworkCredential("App", "Nexion@123");
+                        client.UploadFile(To, WebRequestMethods.Ftp.UploadFile, From);
+                    
+                    }
+
+                
+
+
+               
+
+
+
+
+
+                //FtpWebRequest Request = (FtpWebRequest)WebRequest.Create("ftp://");
+
+                //Request.Method = WebRequestMethods.Ftp.UploadFile;
+                //Request.Credentials = new NetworkCredential("user", "pass");
+                //FtpWebResponse Response = (FtpWebResponse)Request.GetResponse();
+
+                //Stream ResponseStream = Response.GetResponseStream();
+                //StreamReader Reader = new StreamReader(ResponseStream);
+
+                ////FileInfo[] Files = directoru.GetFiles("*.txt");
+
+                ////ListBox1.Items.Add(Response.WelcomeMessage);
+
+                ////while (!Reader.EndOfStream)//Read file name   
+                ////{
+                ////    ListBox1.Items.Add(Reader.ReadLine().ToString());
+                ////}
+                //Response.Close();
+                //ResponseStream.Close();
+                //Reader.Close();
+
+
+                //string fullPathToExcel = "./"+ streamWriter.Name; //ie C:\Temp\YourExcel.xls
+                //string connString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0;HDR=yes'", fullPathToExcel);
+                //DataTable dt = GetDataTable("SELECT * from [Sheet1]", connString);
+
+                //foreach (DataRow dr in dt.Rows)
+                //{
+                //    //Do what you need to do with your data here
+                //}
+
+
+
+
+
+
+
+
+                //  GlobalData.me.CoverPhotoLength = stream.Length;
+
+                // return GlobalData.me.CoverPhotoLength;
+
+
+                //var fileName = files.Name;
+                //var fileSize = files.Length;
+                //await using Stream stream = files.OpenReadStream();
+                //var path = Environment.CurrentDirectory;
+
+                //List<IFile> data = new List<IFile>();
+                //data.Add(files);
+
+
+                //List<string> result = new List<string>();
+
+                //Console.WriteLine(data.Count);
+
+                //foreach (var f in data)
+                //{
+                //    if (f.Length > 0)
+                //    {
+                //        Directory.CreateDirectory("Resources");
+                //        using (var stream1 = new FileStream("./test.zip", FileMode.OpenOrCreate))
+                //        {
+
+                //            await f.CopyToAsync(stream1);
+                //            result.Add(f.Name);
+                //        }
+                //    }
+                //}
+
+
+
+
+
+                //using (var writer = File.Create("C:\\"))
+                //{
+
+                //    await stream.CopyToAsync(writer).ConfigureAwait(false);
+                //}
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "success");
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+            finally
+            {
+
+            }
+
+        }
+
+
+        private DataTable GetDataTable(string sql, string connectionString)
+        {
+            DataTable dt = null;
+
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            {
+                conn.Open();
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
+                {
+                    using (OleDbDataReader rdr = cmd.ExecuteReader())
+                    {
+                        dt.Load(rdr);
+                        return dt;
+                    }
+                }
+            }
+        }
+
+        //--------------------------------------------------- End File Uplode ------------------------------------------//
+        //public async Task<bool> UploadFileAsync(IFile file)
+        //{
+        //    //var fileName = file.Name;
+        //    //var fileSize = file.Length;
+
+        //    //await using Stream stream = file.OpenReadStream();
+
+        //    return true;
+        //    // We can now work with standard stream functionality of .NET
+        //    // to handle the file.
+        //}
+
+        //public static IFormFile GetFile(this IResolverContext ctx, NameString name)
+        //{
+        //    var contextAccessor = ctx.Service<IHttpContextAccessor>();
+        //    return contextAccessor.HttpContext.Request.Form.Files[name.Value];
+        //}
 
 
     }
