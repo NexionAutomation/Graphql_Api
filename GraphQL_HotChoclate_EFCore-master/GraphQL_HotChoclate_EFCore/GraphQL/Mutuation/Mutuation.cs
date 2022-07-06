@@ -2546,17 +2546,21 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                 //var streamWriter = new FileStream("./test.zip", FileMode.OpenOrCreate);
 
                 //await stream.CopyToAsync(streamWriter);
+                var FILENAME="";
+                FileStream streamWriter;
+                var ext = "";
 
-
+                if (triger!="DELETE")
+                { 
                 
 
                 var filename = file.Name;
                 var dir = "";
-                var ext = Path.GetExtension(filename);
+                 ext = Path.GetExtension(filename);
                 await using var stream = file.OpenReadStream();
 
-                var FILENAME = DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
-                var streamWriter = new FileStream("FilesData/" + FILENAME, FileMode.OpenOrCreate);
+                 FILENAME = DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
+                 streamWriter = new FileStream("FilesData/" + FILENAME, FileMode.OpenOrCreate);
 
                 string From = streamWriter.Name;
 
@@ -2572,6 +2576,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     client.Credentials = new NetworkCredential("App", "Nexion@123");
                     client.UploadFile(To, WebRequestMethods.Ftp.UploadFile, From);
 
+                }
                 }
 
 

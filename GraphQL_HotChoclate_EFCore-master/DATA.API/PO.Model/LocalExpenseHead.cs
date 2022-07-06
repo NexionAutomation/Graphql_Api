@@ -14,5 +14,23 @@ namespace GraphQl.DATA.API.PO.Model
         public int? CreatedBy { get; set; }
         public DateTime? UpdateOn { get; set; }
         public int? UpdateBy { get; set; }
+
+
+        public string Title { get; set; }
+        public string WorkOrderId { get; set; }
+        public string Location { get; set; }
+        public decimal Amount { get; set; }
+        public decimal ApprovedAmount { get; set; }
+        public int StatusID { get; set; }
+
+        public string statusname { get; set; }
+        public string CreatedName { get; set; }
+
+        public string UpdatedName { get; set; }
+
+
+
+    
+
     }
 }

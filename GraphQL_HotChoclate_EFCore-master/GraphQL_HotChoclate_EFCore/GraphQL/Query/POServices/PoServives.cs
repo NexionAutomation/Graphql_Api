@@ -106,11 +106,11 @@ namespace GraphQL_HotChoclate_EFCore.Services
         }
         [UseFiltering]
         [UseSorting]
-        public Task<IQueryable<ExpenseHead>> POExpenseHeads([Service] poContext context)
+        public Task<IQueryable<VwOutStationExpense>> POExpenseHeads([Service] poContext context)
         {
             try
             {
-                List<ExpenseHead> tmUserMaster = context.ExpenseHeads.ToList();
+                List<VwOutStationExpense> tmUserMaster = context.VwOutStationExpenses.OrderByDescending(x=>x.ExpenseId).ToList();
                 return Task.Run(() => tmUserMaster.AsQueryable());
             }
             catch (Exception ex)
@@ -124,7 +124,7 @@ namespace GraphQL_HotChoclate_EFCore.Services
         {
             try
             {
-                List<ExpenseItem> tmUserMaster = context.ExpenseItems.ToList();
+                List<ExpenseItem> tmUserMaster = context.ExpenseItems.OrderByDescending(x=>x.ExpenseItemsId).ToList();
                 return Task.Run(() => tmUserMaster.AsQueryable());
             }
             catch (Exception ex)
