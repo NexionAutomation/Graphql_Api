@@ -10,8 +10,11 @@ using HotChocolate.Resolvers;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -999,6 +1002,399 @@ namespace GraphQL_HotChoclate_EFCore.Services
                 return null;
             }
         }
+
+
+
+        public async Task<IQueryable< ExcelImporter01>> UploadFileExcel(IFile files)
+        {
+            try
+            {
+
+
+
+                System.IO.DirectoryInfo di = new DirectoryInfo("FilesData/");
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+
+
+                DataTable csvData = new DataTable();
+
+
+
+
+                var FILENAME = "";
+                FileStream streamWriter;
+                var ext = "";
+                string From1 = "";
+
+                if (files != null)
+                {
+
+
+                    var filename1 = files.Name;
+                    var dir1 = "";
+                    ext = System.IO.Path.GetExtension(filename1);
+                    await using var stream1 = files.OpenReadStream();
+
+                    FILENAME = DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
+                    streamWriter = new FileStream("FilesData/" + FILENAME, FileMode.OpenOrCreate);
+
+                    From1 = streamWriter.Name;
+
+
+                    await stream1.CopyToAsync(streamWriter);
+
+                    streamWriter.Close();
+
+                    string To1 = "ftp://182.50.132.58/FileData/" + FILENAME;
+
+                    //using (var client = new WebClient())
+                    //{
+                    //    client.Credentials = new NetworkCredential("App", "Nexion@123");
+                    //    client.UploadFile(To1, WebRequestMethods.Ftp.UploadFile, From1);
+
+                    //}
+                }
+
+
+
+                using (TextFieldParser csvReader = new TextFieldParser(From1))
+                {
+                    csvReader.SetDelimiters(new string[] { "," });
+                    csvReader.HasFieldsEnclosedInQuotes = true;
+                    
+                    string[] colFields = csvReader.ReadFields();
+                    foreach (string column in colFields)
+                    {
+                        DataColumn datecolumn = new DataColumn(column);
+                        datecolumn.AllowDBNull = true;
+                        csvData.Columns.Add(datecolumn);
+                    }
+                    while (!csvReader.EndOfData)
+                    {
+                        string[] fieldData = csvReader.ReadFields();
+                        //Making empty value as null
+                        for (int i = 0; i < fieldData.Length; i++)
+                        {
+                            if (fieldData[i] == "")
+                            {
+                                fieldData[i] = null;
+                            }
+                        }
+                        csvData.Rows.Add(fieldData);
+                    }
+                }
+
+
+                var olddata="";
+
+                List<ExcelImporter01> studentList = new List<ExcelImporter01>();
+                for (int i = 0; i < csvData.Rows.Count; i++)
+                {
+                   
+                    ExcelImporter01 student = new ExcelImporter01();
+
+
+
+
+                    olddata = csvData.Rows[i][1].ToString() != "" ? csvData.Rows[i][1].ToString() : olddata;
+
+
+                    student.T1 = csvData.Rows[i][0].ToString(); 
+                         student.T2 = olddata; 
+                         student.T3 = csvData.Rows[i][2].ToString(); 
+                         student.T4 = csvData.Rows[i][3].ToString(); 
+                         student.T5 = csvData.Rows[i][4].ToString(); 
+                         student.T6 = csvData.Rows[i][5].ToString(); 
+                         student.T7 = csvData.Rows[i][6].ToString(); 
+                         student.T8 = csvData.Rows[i][7].ToString(); 
+                         student.T9 = csvData.Rows[i][8].ToString(); 
+                         student.T10 = csvData.Rows[i][9].ToString();
+                         student.T11 = csvData.Rows[i][10].ToString(); 
+                         student.T12 = csvData.Rows[i][11].ToString(); 
+                         student.T13 = csvData.Rows[i][12].ToString(); 
+                         student.T14 = csvData.Rows[i][13].ToString(); 
+                         student.T15 = csvData.Rows[i][14].ToString(); 
+                         student.T16 = csvData.Rows[i][15].ToString(); 
+                         student.T17 = csvData.Rows[i][16].ToString(); 
+                         student.T18 = csvData.Rows[i][17].ToString(); 
+                         student.T19 = csvData.Rows[i][18].ToString(); 
+                         student.T20 = csvData.Rows[i][19].ToString(); 
+                         student.T21 = csvData.Rows[i][20].ToString(); 
+                         student.T22 = csvData.Rows[i][21].ToString(); 
+                         student.T23 = csvData.Rows[i][22].ToString(); 
+                         student.T24 = csvData.Rows[i][23].ToString(); 
+                         student.T25 = csvData.Rows[i][24].ToString(); 
+                         student.T26 = csvData.Rows[i][25].ToString(); 
+                         student.T27 = csvData.Rows[i][26].ToString(); 
+                         student.T28 = csvData.Rows[i][27].ToString(); 
+                         student.T29 = csvData.Rows[i][28].ToString(); 
+                         student.T30 = csvData.Rows[i][29].ToString(); 
+                         student.T31 = csvData.Rows[i][30].ToString(); 
+                         student.T32 = csvData.Rows[i][31].ToString(); 
+                         student.T33 = csvData.Rows[i][32].ToString(); 
+                         student.T34 = csvData.Rows[i][33].ToString(); 
+                         student.T35 = csvData.Rows[i][34].ToString(); 
+                         student.T36 = csvData.Rows[i][35].ToString(); 
+                         student.T37 = csvData.Rows[i][36].ToString(); 
+                         student.T38 = csvData.Rows[i][37].ToString(); 
+                         student.T39 = csvData.Rows[i][38].ToString(); 
+                         student.T40 = csvData.Rows[i][39].ToString(); 
+                         student.T41 = csvData.Rows[i][40].ToString(); 
+                         student.T42 = csvData.Rows[i][41].ToString(); 
+                         student.T43 = csvData.Rows[i][42].ToString(); 
+                         student.T44 = csvData.Rows[i][43].ToString(); 
+                         student.T45 = csvData.Rows[i][44].ToString(); 
+                         student.T46 = csvData.Rows[i][45].ToString(); 
+                         student.T47 = csvData.Rows[i][46].ToString(); 
+                         student.T48 = csvData.Rows[i][47].ToString(); 
+                         student.T49 = csvData.Rows[i][48].ToString(); 
+                         student.T50 = csvData.Rows[i][49].ToString(); 
+
+                      
+
+
+
+                    studentList.Add(student);
+                }
+
+
+            var data=   studentList.ToLookup(a=>a.T2,a=>a);
+               
+
+
+
+              
+
+                //List<Attandance> dataatt = new List<Attandance>();
+                //foreach (var da in data)
+                //{
+
+
+                //    foreach (var dai in da)
+                //    {
+
+                //        if(da.Key=="")
+                //        {
+                //            dataatt.Add(new Attandance
+                //            {
+                //                Date=dai.
+
+                //            });
+                //        }
+                //        //dataatt.
+                //    }
+
+                //}
+
+
+
+
+
+                //List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                //ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail:  null, Status: "success");
+                //responseDatas2.Add(dat);
+                return await Task.Run(() => studentList.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+
+
+                List<ExcelImporter01> studentList = new List<ExcelImporter01>();
+                //ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                //responseDatas2.Add(dat);
+                return null;//await Task.Run(() => null);
+            }
+
+            finally
+            {
+
+            }
+
+        }
+
+
+
+
+
+        public async Task<IQueryable<ExcelImporter01>> UploadFileExcelAttandance(IFile files)
+        {
+            try
+            {
+
+
+
+                System.IO.DirectoryInfo di = new DirectoryInfo("FilesData/");
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+
+
+                DataTable csvData = new DataTable();
+
+
+
+
+                var FILENAME = "";
+                FileStream streamWriter;
+                var ext = "";
+                string From1 = "";
+
+                if (files != null)
+                {
+
+
+                    var filename1 = files.Name;
+                    var dir1 = "";
+                    ext = System.IO.Path.GetExtension(filename1);
+                    await using var stream1 = files.OpenReadStream();
+
+                    FILENAME = DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
+                    streamWriter = new FileStream("FilesData/" + FILENAME, FileMode.OpenOrCreate);
+
+                    From1 = streamWriter.Name;
+
+
+                    await stream1.CopyToAsync(streamWriter);
+
+                    streamWriter.Close();
+
+                    string To1 = "ftp://182.50.132.58/FileData/" + FILENAME;
+
+                    //using (var client = new WebClient())
+                    //{
+                    //    client.Credentials = new NetworkCredential("App", "Nexion@123");
+                    //    client.UploadFile(To1, WebRequestMethods.Ftp.UploadFile, From1);
+
+                    //}
+                }
+
+
+
+                using (TextFieldParser csvReader = new TextFieldParser(From1))
+                {
+                    csvReader.SetDelimiters(new string[] { "," });
+                    csvReader.HasFieldsEnclosedInQuotes = true;
+                    string[] colFields = csvReader.ReadFields();
+                    foreach (string column in colFields)
+                    {
+                        DataColumn datecolumn = new DataColumn(column);
+                        datecolumn.AllowDBNull = true;
+                        csvData.Columns.Add(datecolumn);
+                    }
+                    while (!csvReader.EndOfData)
+                    {
+                        string[] fieldData = csvReader.ReadFields();
+                        //Making empty value as null
+                        for (int i = 0; i < fieldData.Length; i++)
+                        {
+                            if (fieldData[i] == "")
+                            {
+                                fieldData[i] = null;
+                            }
+                        }
+                        csvData.Rows.Add(fieldData);
+                    }
+                }
+
+
+
+
+                List<ExcelImporter01> studentList = new List<ExcelImporter01>();
+                for (int i = 0; i < csvData.Rows.Count; i++)
+                {
+                    var a = i;
+                    ExcelImporter01 student = new ExcelImporter01();
+
+
+
+                   if(a >= csvData.Rows.Count){ student.T1 = csvData.Rows[i][0].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T2 = csvData.Rows[i][1].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T3 = csvData.Rows[i][2].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T4 = csvData.Rows[i][3].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T5 = csvData.Rows[i][4].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T6 = csvData.Rows[i][5].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T7 = csvData.Rows[i][6].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T8 = csvData.Rows[i][7].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T9 = csvData.Rows[i][8].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T10 = csvData.Rows[i][9].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T11 = csvData.Rows[i][10].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T12 = csvData.Rows[i][11].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T13 = csvData.Rows[i][12].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T14 = csvData.Rows[i][13].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T15 = csvData.Rows[i][14].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T16 = csvData.Rows[i][15].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T17 = csvData.Rows[i][16].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T18 = csvData.Rows[i][17].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T19 = csvData.Rows[i][18].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T20 = csvData.Rows[i][19].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T21 = csvData.Rows[i][20].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T22 = csvData.Rows[i][21].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T23 = csvData.Rows[i][22].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T24 = csvData.Rows[i][23].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T25 = csvData.Rows[i][24].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T26 = csvData.Rows[i][25].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T27 = csvData.Rows[i][26].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T28 = csvData.Rows[i][27].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T29 = csvData.Rows[i][28].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T30 = csvData.Rows[i][29].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T31 = csvData.Rows[i][30].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T32 = csvData.Rows[i][31].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T33 = csvData.Rows[i][32].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T34 = csvData.Rows[i][33].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T35 = csvData.Rows[i][34].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T36 = csvData.Rows[i][35].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T37 = csvData.Rows[i][36].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T38 = csvData.Rows[i][37].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T39 = csvData.Rows[i][38].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T40 = csvData.Rows[i][39].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T41 = csvData.Rows[i][40].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T42 = csvData.Rows[i][41].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T43 = csvData.Rows[i][42].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T44 = csvData.Rows[i][43].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T45 = csvData.Rows[i][44].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T46 = csvData.Rows[i][45].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T47 = csvData.Rows[i][46].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T48 = csvData.Rows[i][47].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T49 = csvData.Rows[i][48].ToString();  }
+                   if(a >= csvData.Rows.Count){ student.T50 = csvData.Rows[i][49].ToString();  }
+                    if (a >= csvData.Rows.Count){ student.T51 = csvData.Rows[i][50].ToString();  }
+
+                    studentList.Add(student);
+                }
+
+
+
+
+
+                //List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                //ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail:  null, Status: "success");
+                //responseDatas2.Add(dat);
+                return await Task.Run(() => studentList.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+
+
+                List<ExcelImporter01> studentList = new List<ExcelImporter01>();
+                //ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                //responseDatas2.Add(dat);
+                return await Task.Run(() => studentList.AsQueryable());
+            }
+
+            finally
+            {
+
+            }
+
+        }
+
+
 
 
 

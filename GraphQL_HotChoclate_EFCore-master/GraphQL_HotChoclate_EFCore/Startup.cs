@@ -48,7 +48,7 @@ namespace GraphQL_HotChoclate_EFCore
 
 
 
-            services.AddGraphQLServer().AddQueryType<PoUserServices>(q=>q.Name("Query")).AddFiltering().AddSorting();
+            services.AddGraphQLServer().AddQueryType<PoUserServices>(q=>q.Name("Query")).AddFiltering().AddSorting().AddType<UploadType>(); ;
             services.AddGraphQLServer().AddMutationType<PoUserMutation>(q => q.Name("Mutuation")).AddType<UploadType>(); ;
             
             //services.AddGraphQLServer().AddQueryType<CRMUserServices>();
