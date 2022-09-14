@@ -314,6 +314,7 @@ namespace GraphQL_HotChoclate_EFCore.Services
             try
             {
                 List<Lead> tmUserMaster = context.Leads.ToList();
+              
                 return Task.Run(() => tmUserMaster.AsQueryable());
             }
             catch (Exception ex)

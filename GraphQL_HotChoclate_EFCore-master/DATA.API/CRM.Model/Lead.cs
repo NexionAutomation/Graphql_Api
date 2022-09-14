@@ -24,6 +24,7 @@ namespace GraphQl.DATA.API.Models
         public double? Probability { get; set; }
         public string Source { get; set; }
         public bool MustWin { get; set; }
+
         public string LeadTrackId { get; set; }
         public int? CompanyId { get; set; }
         public bool? IsDeleted { get; set; }

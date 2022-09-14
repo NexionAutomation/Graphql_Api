@@ -88,11 +88,14 @@ namespace GraphQl.DATA.API.PO.Model
     }
 
 
+
+
     public partial class Attandance
     {
         public string Sno { get; set; }
         public string Name { get; set; }
         public string Date { get; set; }
+        public string Day { get; set; }
 
         public string Time { get; set; }
 

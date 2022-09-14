@@ -123,6 +123,20 @@ namespace GraphQL_HotChoclate_EFCore.Services
         }
         [UseFiltering]
         [UseSorting]
+        public Task<IQueryable<ExpenseItem>> POExpenseHeadsActual([Service] poContext context)
+        {
+            try
+            {
+                List<ExpenseItem> tmUserMaster = context.ExpenseItems.OrderByDescending(x => x.ExpenseId).ToList();
+                return Task.Run(() => tmUserMaster.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        [UseFiltering]
+        [UseSorting]
         public Task<IQueryable<ExpenseItem>> POExpenseItems([Service] poContext context)
         {
             try
@@ -1025,6 +1039,17 @@ namespace GraphQL_HotChoclate_EFCore.Services
 
 
 
+                DataTable csvData2 = new DataTable();
+
+
+                csvData2.Columns.Add("sno");
+                csvData2.Columns.Add("Name");
+                csvData2.Columns.Add("Date");
+                csvData2.Columns.Add("Day");
+                csvData2.Columns.Add("IN");
+                csvData2.Columns.Add("OUT");
+
+
                 var FILENAME = "";
                 FileStream streamWriter;
                 var ext = "";
@@ -1061,6 +1086,13 @@ namespace GraphQL_HotChoclate_EFCore.Services
 
 
 
+                List<ExcelImporter01> studentList = new List<ExcelImporter01>();
+
+                var notchange="";
+
+
+                List<string> Dates=new List<string>();
+                List<string> day = new List<string>();
                 using (TextFieldParser csvReader = new TextFieldParser(From1))
                 {
                     csvReader.SetDelimiters(new string[] { "," });
@@ -1081,17 +1113,25 @@ namespace GraphQL_HotChoclate_EFCore.Services
                         {
                             if (fieldData[i] == "")
                             {
+
+                                
+
                                 fieldData[i] = null;
                             }
+                           
+
+
+
                         }
                         csvData.Rows.Add(fieldData);
+
                     }
                 }
 
 
                 var olddata="";
 
-                List<ExcelImporter01> studentList = new List<ExcelImporter01>();
+              
                 for (int i = 0; i < csvData.Rows.Count; i++)
                 {
                    
@@ -1100,18 +1140,18 @@ namespace GraphQL_HotChoclate_EFCore.Services
 
 
 
-                    olddata = csvData.Rows[i][1].ToString() != "" ? csvData.Rows[i][1].ToString() : olddata;
+                    //olddata = csvData.Rows[i][1].ToString() != "" ? csvData.Rows[i][1].ToString() : olddata;
 
 
-                    student.T1 = csvData.Rows[i][0].ToString(); 
-                         student.T2 = olddata; 
-                         student.T3 = csvData.Rows[i][2].ToString(); 
-                         student.T4 = csvData.Rows[i][3].ToString(); 
-                         student.T5 = csvData.Rows[i][4].ToString(); 
-                         student.T6 = csvData.Rows[i][5].ToString(); 
-                         student.T7 = csvData.Rows[i][6].ToString(); 
-                         student.T8 = csvData.Rows[i][7].ToString(); 
-                         student.T9 = csvData.Rows[i][8].ToString(); 
+                          student.T1 = csvData.Rows[i][0].ToString(); 
+                          student.T2 = csvData.Rows[i][1].ToString();
+                          student.T3 = csvData.Rows[i][2].ToString(); 
+                          student.T4 = csvData.Rows[i][3].ToString(); 
+                          student.T5 = csvData.Rows[i][4].ToString(); 
+                          student.T6 = csvData.Rows[i][5].ToString(); 
+                          student.T7 = csvData.Rows[i][6].ToString(); 
+                          student.T8 = csvData.Rows[i][7].ToString(); 
+                          student.T9 = csvData.Rows[i][8].ToString(); 
                          student.T10 = csvData.Rows[i][9].ToString();
                          student.T11 = csvData.Rows[i][10].ToString(); 
                          student.T12 = csvData.Rows[i][11].ToString(); 
@@ -1162,12 +1202,244 @@ namespace GraphQL_HotChoclate_EFCore.Services
                 }
 
 
-            var data=   studentList.ToLookup(a=>a.T2,a=>a);
+
+                //csvData
+
+
+            //var data=   studentList.ToLookup(a=>a.T3,a=>a).ToList();
+
+
+                //    data.ForEach(a => {
+
+
+                //        if(a.Key == "DAY")
+                //        {
+                //            data.ForEach(ab =>
+                //            {
+                //                day.Add(ab.Key);
+                //            });
+
+
+
+                //        }
+
+
+
+                //    });
+
+
+
+                //List<Attandance> dataatt = new List<Attandance>();
+                //foreach (var da in data)
+                //{
+
+
+                //    foreach (var dai in da)
+                //    {
+
+                //        if(da.Key=="")
+                //        {
+                //            dataatt.Add(new Attandance
+                //            {
+                //                Date=dai.
+
+                //            });
+                //        }
+                //        //dataatt.
+                //    }
+
+                //}
+
+
+
+
+
+                //List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                //ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail:  null, Status: "success");
+                //responseDatas2.Add(dat);
+                return await Task.Run(() => studentList.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+
+
+                List<ExcelImporter01> studentList = new List<ExcelImporter01>();
+                //ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                //responseDatas2.Add(dat);
+                return null;//await Task.Run(() => null);
+            }
+
+            finally
+            {
+
+            }
+
+        }
+
+
+
+        public async Task<IQueryable<ExcelImporter01>> POItemFileUplodeExcel(IFile files)
+        {
+            try
+            {
+
+
+
+                System.IO.DirectoryInfo di = new DirectoryInfo("FilesData/");
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+
+
+                DataTable csvData = new DataTable();
+
+
+
+
+                DataTable csvData2 = new DataTable();
+
                
-
-
-
+                csvData2.Columns.Add("Cat No");
+                csvData2.Columns.Add("Description");
+                csvData2.Columns.Add("Make");
+                csvData2.Columns.Add("Total Qty");
+                csvData2.Columns.Add("Stock Qty");
               
+
+
+                var FILENAME = "";
+                FileStream streamWriter;
+                var ext = "";
+                string From1 = "";
+
+                if (files != null)
+                {
+
+
+                    var filename1 = files.Name;
+                    var dir1 = "";
+                    ext = System.IO.Path.GetExtension(filename1);
+                    await using var stream1 = files.OpenReadStream();
+
+                    FILENAME = DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
+                    streamWriter = new FileStream("FilesData/" + FILENAME, FileMode.OpenOrCreate);
+
+                    From1 = streamWriter.Name;
+
+
+                    await stream1.CopyToAsync(streamWriter);
+
+                    streamWriter.Close();
+
+                    string To1 = "ftp://182.50.132.58/FileData/" + FILENAME;
+
+                    //using (var client = new WebClient())
+                    //{
+                    //    client.Credentials = new NetworkCredential("App", "Nexion@123");
+                    //    client.UploadFile(To1, WebRequestMethods.Ftp.UploadFile, From1);
+
+                    //}
+                }
+
+
+
+                List<ExcelImporter01> studentList = new List<ExcelImporter01>();
+
+                var notchange = "";
+
+
+                List<string> Dates = new List<string>();
+                List<string> day = new List<string>();
+                using (TextFieldParser csvReader = new TextFieldParser(From1))
+                {
+                    csvReader.SetDelimiters(new string[] { "," });
+                    csvReader.HasFieldsEnclosedInQuotes = true;
+
+                    string[] colFields = csvReader.ReadFields();
+                    foreach (string column in colFields)
+                    {
+                        DataColumn datecolumn = new DataColumn(column);
+                        datecolumn.AllowDBNull = true;
+                        csvData.Columns.Add(datecolumn);
+                    }
+                    while (!csvReader.EndOfData)
+                    {
+                        string[] fieldData = csvReader.ReadFields();
+                        //Making empty value as null
+                        for (int i = 0; i < fieldData.Length; i++)
+                        {
+                            if (fieldData[i] == "")
+                            {
+
+
+
+                                fieldData[i] = null;
+                            }
+
+
+
+
+                        }
+                        csvData.Rows.Add(fieldData);
+
+                    }
+                }
+
+
+                var olddata = "";
+
+
+                for (int i = 0; i < csvData.Rows.Count; i++)
+                {
+
+                    ExcelImporter01 student = new ExcelImporter01();
+
+                    //olddata = csvData.Rows[i][1].ToString() != "" ? csvData.Rows[i][1].ToString() : olddata;
+
+                    student.T1 = csvData.Rows[i][0].ToString();
+                    student.T2 = csvData.Rows[i][1].ToString();
+                    student.T3 = csvData.Rows[i][2].ToString();
+                    student.T4 = csvData.Rows[i][3].ToString();
+                    student.T5 = csvData.Rows[i][4].ToString();
+                    //student.T6 = csvData.Rows[i][5].ToString();
+                    //student.T7 = csvData.Rows[i][6].ToString();
+                    //student.T8 = csvData.Rows[i][7].ToString();
+                    //student.T9 = csvData.Rows[i][8].ToString();
+                    //student.T10 = csvData.Rows[i][9].ToString();
+                    //student.T11 = csvData.Rows[i][10].ToString();
+                 
+                    studentList.Add(student);
+                }
+
+
+
+                //csvData
+
+
+                //var data=   studentList.ToLookup(a=>a.T3,a=>a).ToList();
+
+
+                //    data.ForEach(a => {
+
+
+                //        if(a.Key == "DAY")
+                //        {
+                //            data.ForEach(ab =>
+                //            {
+                //                day.Add(ab.Key);
+                //            });
+
+
+
+                //        }
+
+
+
+                //    });
+
+
 
                 //List<Attandance> dataatt = new List<Attandance>();
                 //foreach (var da in data)
