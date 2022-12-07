@@ -35,7 +35,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
         }
 
 
-      
+
 
 
         public async Task<IQueryable<ResponseData<string>>> CMTmAdminSubModuleMasters(ResponseData<CMAdminSubModuleMaster> data, string triger)
@@ -218,7 +218,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
                             //objCustomer.moduleId,
-                           // objCustomer.Rid = data1.Rid;
+                            // objCustomer.Rid = data1.Rid;
                             //objCustomer.MuserId = data1.MuserId;
                             objCustomer.ModuleOrder = data1.ModuleOrder;//data1.CreationDate;
                             objCustomer.ModuleName = data1.ModuleName;
@@ -276,7 +276,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.ModuleId = data1.ModuleId;
                             objCustomer.CreationDate = data1.CreationDate;
                             objCustomer.CuserId = data1.CuserId;
-                          
+
 
 
 
@@ -358,15 +358,15 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     {
                         try
                         {
-                        //    var book = new ExcelQueryFactory("pathToExcelFile");
-                        //    var australia = from x in book.Worksheet()
-                        //                    where x["Country"] == "Aust"
-                        //                    select new
-                        //                    {
-                        //                        Country = x["Country"],
-                        //                        BookCode = x["Code"],
-                        //                        BookName = x["Name"]
-                        //                    };
+                            //    var book = new ExcelQueryFactory("pathToExcelFile");
+                            //    var australia = from x in book.Worksheet()
+                            //                    where x["Country"] == "Aust"
+                            //                    select new
+                            //                    {
+                            //                        Country = x["Country"],
+                            //                        BookCode = x["Code"],
+                            //                        BookName = x["Name"]
+                            //                    };
 
 
 
@@ -374,22 +374,22 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
-                           
 
-                            objCustomer.GroupId= data1.GroupId;
-                            objCustomer.ModuleId= data1.ModuleId;
-                            objCustomer.SubModuleId= data1.SubModuleId;
-                            objCustomer.CanView= data1.CanView;
-                            objCustomer.CanSave= data1.CanSave;
-                            objCustomer.CanSearch= data1.CanSearch;
-                            objCustomer.CanUpdate= data1.CanUpdate;
-                            objCustomer.CanDelete= data1.CanDelete;
+
+                            objCustomer.GroupId = data1.GroupId;
+                            objCustomer.ModuleId = data1.ModuleId;
+                            objCustomer.SubModuleId = data1.SubModuleId;
+                            objCustomer.CanView = data1.CanView;
+                            objCustomer.CanSave = data1.CanSave;
+                            objCustomer.CanSearch = data1.CanSearch;
+                            objCustomer.CanUpdate = data1.CanUpdate;
+                            objCustomer.CanDelete = data1.CanDelete;
                             objCustomer.CuserId = data1.CuserId;
-                            objCustomer.MuserId= data1.MuserId;
-                            objCustomer.UserCode= data1.UserCode;
-                            objCustomer.CanExport= data1.CanExport;
+                            objCustomer.MuserId = data1.MuserId;
+                            objCustomer.UserCode = data1.UserCode;
+                            objCustomer.CanExport = data1.CanExport;
                             objCustomer.CreationDate = DateTime.Now;
-                            objCustomer.ModificationDate= DateTime.Now;
+                            objCustomer.ModificationDate = DateTime.Now;
                             // objCustomer.Rid= data1.Rid;
 
 
@@ -445,9 +445,9 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.MuserId = data1.MuserId;
                             objCustomer.UserCode = data1.UserCode;
                             objCustomer.CanExport = data1.CanExport;
-                           objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.CreationDate = data1.CreationDate;
                             objCustomer.ModificationDate = DateTime.Now;
-                            objCustomer.Rid= data1.Rid;
+                            objCustomer.Rid = data1.Rid;
 
 
 
@@ -478,7 +478,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                 {
 
                     var data1 = (CMWebUserRightsMaster)data.Detail.SingleOrDefault();
-                  
+
                     var delobj = _poContext12.CMWebUserRightsMasters.Where(x => x.UserCode == Convert.ToInt32(data1.UserCode)
                                                  && x.ModuleId == data1.ModuleId && x.GroupId == data1.GroupId).ToList();
                     CMWebUserRightsMaster objCustomer = new CMWebUserRightsMaster();
@@ -486,13 +486,14 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     //objCustomer.Rid = Convert.ToInt32(data.ID);
                     //objCustomer.Rid = 0;
 
-                    delobj.ForEach(ele => {
+                    delobj.ForEach(ele =>
+                    {
                         List<CMWebUserRightsMaster> objCustomer = new List<CMWebUserRightsMaster>();
-                       
+
                         _poContext12.CMWebUserRightsMasters.RemoveRange(delobj);
-                    
+
                     });
-                   await _poContext12.SaveChangesAsync();
+                    await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
                     ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
@@ -553,7 +554,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             var data1 = (TmCountryMaster)data.Detail.SingleOrDefault();
                             TmCountryMaster objCustomer = new TmCountryMaster();
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
-                           ;
+                            ;
 
                             objCustomer.Countrycode = _poContext12.TmCountryMasters.Select(x => x.Countrycode).Max() + 1;
                             objCustomer.Countryname = data1.Countryname;
@@ -651,11 +652,11 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     objCustomer.Countrycode = Convert.ToInt32(data1.Countrycode);
                     //objCustomer.Rid = 0;
                     _poContext12.TmCountryMasters.Remove(objCustomer);
-                     await _poContext12.SaveChangesAsync();
+                    await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
                     ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
-                 
+
                     responseDatas2.Add(dat);
                     return await Task.Run(() => responseDatas2.AsQueryable());
                 }
@@ -693,7 +694,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     {
                         try
                         {
-                           
+
 
 
                             var data1 = (ExpenseGroup)data.Detail.SingleOrDefault();
@@ -749,7 +750,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             ExpenseGroup objCustomer = new ExpenseGroup();
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
-                         
+
 
                             objCustomer.EgroupName = data1.EgroupName;
                             objCustomer.CreatedOn = DateTime.Now;
@@ -763,7 +764,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-        _poContext12.ExpenseGroups.Update(objCustomer);
+                            _poContext12.ExpenseGroups.Update(objCustomer);
                             _poContext12.SaveChanges();
 
 
@@ -795,11 +796,11 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     ExpenseGroup objCustomer = new ExpenseGroup();
 
                     objCustomer.EgroupId = Convert.ToInt32(data.ID);
-                  //  objCustomer.Rid = 0;
+                    //  objCustomer.Rid = 0;
 
-                        _poContext12.ExpenseGroups.Remove(objCustomer);
+                    _poContext12.ExpenseGroups.Remove(objCustomer);
 
-                    
+
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
@@ -842,7 +843,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     {
                         try
                         {
-                            
+
 
 
                             var data1 = (TmCompanyMaster1)data.Detail.SingleOrDefault();
@@ -850,7 +851,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
 
 
-                            objCustomer.Id = _poContext12.TmCompanyMasters.Select(x => x.Id).Max() + 1 ;
+                            objCustomer.Id = _poContext12.TmCompanyMasters.Select(x => x.Id).Max() + 1;
                             objCustomer.CompanyName = data1.CompanyName;
                             objCustomer.Caddress1 = data1.Caddress1;
                             objCustomer.Caddress2 = data1.Caddress2;
@@ -1054,21 +1055,21 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                            objCustomer.Citycode = _poContext12.TmCityMasters.Select(x => x.Citycode).Max() + 1; 
+                            objCustomer.Citycode = _poContext12.TmCityMasters.Select(x => x.Citycode).Max() + 1;
                             objCustomer.Cityname = data1.Cityname;
                             objCustomer.Statecode = data1.Statecode;
                             objCustomer.Creationdate = data1.Creationdate;
                             objCustomer.Modificationdate = data1.Modificationdate;
-                           objCustomer.Usercode = data1.Usercode;
-                             objCustomer.Deleted = data1.Deleted;
+                            objCustomer.Usercode = data1.Usercode;
+                            objCustomer.Deleted = data1.Deleted;
                             objCustomer.Editable = data1.Editable;
-        // objCustomer.Rid= data1.Rid;
+                            // objCustomer.Rid= data1.Rid;
 
 
 
 
 
-        _poContext12.TmCityMasters.Add(objCustomer);
+                            _poContext12.TmCityMasters.Add(objCustomer);
                             await _poContext12.SaveChangesAsync();
 
 
@@ -1144,14 +1145,14 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
                     var data1 = (TmCityMaster)data.Detail.SingleOrDefault();
 
-                    
+
                     TmCityMaster objCustomer = new TmCityMaster();
 
                     objCustomer.Citycode = Convert.ToInt32(data1.Citycode);
                     //objCustomer.Rid = 0;
 
-                  
-                        _poContext12.TmCityMasters.Remove(objCustomer);
+
+                    _poContext12.TmCityMasters.Remove(objCustomer);
 
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
@@ -1299,14 +1300,14 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
                     var data1 = (ExpenseStatusMaster)data.Detail.SingleOrDefault();
 
-                    
+
                     ExpenseStatusMaster objCustomer = new ExpenseStatusMaster();
 
                     objCustomer.StatusId = Convert.ToInt32(data1.StatusId);
                     //objCustomer.Rid = 0;
 
-                   
-                        _poContext12.ExpenseStatusMasters.Remove(objCustomer);
+
+                    _poContext12.ExpenseStatusMasters.Remove(objCustomer);
 
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
@@ -1417,13 +1418,13 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.UpdateOn = data1.UpdateOn;
                             objCustomer.UpdateBy = data1.UpdateBy;
                             objCustomer.Rate = data1.Rate;
-                             objCustomer.Amt = data1.Amt;
+                            objCustomer.Amt = data1.Amt;
                             objCustomer.Km = data1.Km;
                             objCustomer.Park = data1.Park;
 
 
 
-        _poContext12.ExpenseTypes.Update(objCustomer);
+                            _poContext12.ExpenseTypes.Update(objCustomer);
                             _poContext12.SaveChanges();
 
 
@@ -1451,14 +1452,14 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
                     var data1 = (ExpenseType)data.Detail.SingleOrDefault();
 
-                    
+
                     ExpenseType objCustomer = new ExpenseType();
 
                     objCustomer.ExpenseTypeId = Convert.ToInt32(data1.ExpenseTypeId);
                     //objCustomer.Rid = 0;
 
-                   
-                        _poContext12.ExpenseTypes.Remove(objCustomer);
+
+                    _poContext12.ExpenseTypes.Remove(objCustomer);
 
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
@@ -1503,7 +1504,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     {
                         try
                         {
-                           
+
 
                             var data1 = (TmFinaicalYear)data.Detail.SingleOrDefault();
                             TmFinaicalYear objCustomer = new TmFinaicalYear();
@@ -1511,15 +1512,15 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                            objCustomer.Id = _poContext12.TmFinaicalYears.Select(x => x.Id).Max() + 1 ;
-                            objCustomer.Fyname= data1.Fyname;
-                            objCustomer.StartDate= data1.StartDate;
-                            objCustomer.Enddate= data1.Enddate;
-                            objCustomer.PoNumber= data1.PoNumber;
-                            objCustomer.CreationDate= data1.CreationDate;
-                            objCustomer.CuserId= data1.CuserId;
-                            objCustomer.ModificationDate= data1.ModificationDate;
-                            objCustomer.MuserId= data1.MuserId;
+                            objCustomer.Id = _poContext12.TmFinaicalYears.Select(x => x.Id).Max() + 1;
+                            objCustomer.Fyname = data1.Fyname;
+                            objCustomer.StartDate = data1.StartDate;
+                            objCustomer.Enddate = data1.Enddate;
+                            objCustomer.PoNumber = data1.PoNumber;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.ModificationDate = data1.ModificationDate;
+                            objCustomer.MuserId = data1.MuserId;
                             objCustomer.Expenseid = data1.Expenseid;
                             // objCustomer.Rid= data1.Rid;
 
@@ -1605,18 +1606,18 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
                     var data1 = (TmFinaicalYear)data.Detail.SingleOrDefault();
 
-                  
+
                     TmFinaicalYear objCustomer = new TmFinaicalYear();
 
                     objCustomer.Id = Convert.ToInt32(data1.Id);
-                   // objCustomer.Rid = 0;
+                    // objCustomer.Rid = 0;
 
-                   
-                        
 
-                        _poContext12.TmFinaicalYears.Remove(objCustomer);
 
-                   
+
+                    _poContext12.TmFinaicalYears.Remove(objCustomer);
+
+
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
@@ -1685,13 +1686,13 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.Usercode = data1.Usercode;
                             objCustomer.Deleted = data1.Deleted;
                             objCustomer.Editable = data1.Editable;
-        // objCustomer.Rid= data1.Rid;
+                            // objCustomer.Rid= data1.Rid;
 
 
 
 
 
-        _poContext12.TmStateMasters.Add(objCustomer);
+                            _poContext12.TmStateMasters.Add(objCustomer);
                             await _poContext12.SaveChangesAsync();
 
 
@@ -1769,13 +1770,13 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
                     var data1 = (TmStateMaster)data.Detail.SingleOrDefault();
 
-                   
+
                     TmStateMaster objCustomer = new TmStateMaster();
 
                     objCustomer.Statecode = Convert.ToInt32(data1.Statecode);
                     //objCustomer.Rid = 0;
 
-                        _poContext12.TmStateMasters.Remove(objCustomer);
+                    _poContext12.TmStateMasters.Remove(objCustomer);
 
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
@@ -1931,10 +1932,10 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     objCustomer.Id = Convert.ToInt32(data1.Id);
                     //objCustomer.Rid = 0;
 
-                 
-                        _poContext12.TmSupplierMasters.Remove(objCustomer);
 
-                   
+                    _poContext12.TmSupplierMasters.Remove(objCustomer);
+
+
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
@@ -1982,7 +1983,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
                 await using var stream = files.OpenReadStream();
 
-                var streamWriter = new FileStream("./" + DateTime.Now.ToString("ddMMyyyyhhmmss")+".pdf", FileMode.OpenOrCreate);
+                var streamWriter = new FileStream("./" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".pdf", FileMode.OpenOrCreate);
 
                 await stream.CopyToAsync(streamWriter);
 
@@ -2070,7 +2071,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
         //    return contextAccessor.HttpContext.Request.Form.Files[name.Value];
         //}
 
-         public async Task<IQueryable<ResponseData<string>>> CMExpenseHead(ResponseData<ExpenseHead> data, string triger)
+        public async Task<IQueryable<ResponseData<string>>> CMExpenseHead(ResponseData<ExpenseHead> data, string triger)
         {
 
             try
@@ -2111,7 +2112,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             _poContext12.ExpenseHeads.Add(objCustomer);
                             await _poContext12.SaveChangesAsync();
                             List<string> DAT = new List<string>();
-                            var DATA= Convert.ToString( _poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max());
+                            var DATA = Convert.ToString(_poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max());
                             DAT.Add(DATA);
                             dbContextTransaction1.Commit();
                             ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: DAT, Status: "INSERT");
@@ -2149,18 +2150,18 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
                             objCustomer.ExpenseId = data1.ExpenseId;
                             objCustomer.Title = data1.Title;
-                           objCustomer.PeriodForm = data1.PeriodForm;
+                            objCustomer.PeriodForm = data1.PeriodForm;
                             objCustomer.PeriodTo = data1.PeriodTo;
-                           objCustomer.WorkOrderId = data1.WorkOrderId;
-                           objCustomer.Location = data1.Location;
+                            objCustomer.WorkOrderId = data1.WorkOrderId;
+                            objCustomer.Location = data1.Location;
                             objCustomer.CreatedOn = data1.CreatedOn;
-                           objCustomer.CreatedBy = data1.CreatedBy;
+                            objCustomer.CreatedBy = data1.CreatedBy;
                             objCustomer.UpdateOn = data1.UpdateOn;
                             objCustomer.UpdateBy = data1.UpdateBy;
 
 
 
-        _poContext12.ExpenseHeads.Update(objCustomer);
+                            _poContext12.ExpenseHeads.Update(objCustomer);
                             _poContext12.SaveChanges();
 
 
@@ -2193,10 +2194,10 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                     objCustomer.ExpenseId = Convert.ToInt32(data1.ExpenseId);
                     //objCustomer.Rid = 0;
 
-                 
-                        _poContext12.ExpenseHeads.Remove(objCustomer);
 
-                   
+                    _poContext12.ExpenseHeads.Remove(objCustomer);
+
+
                     await _poContext12.SaveChangesAsync();
                     //dbContextTransaction.Commit();
                     //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
@@ -2417,13 +2418,13 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.UpdateBy = data1.UpdateBy;
                             objCustomer.Comments = data1.Comments;
                             objCustomer.Rid = 0;//_poContext12.ExpenseStatusStates.Select(x => x.Rid).Max() + 1;
-                                     // objCustomer.Rid= data1.Rid;
+                                                // objCustomer.Rid= data1.Rid;
 
 
 
 
 
-        _poContext12.ExpenseStatusStates.Add(objCustomer);
+                            _poContext12.ExpenseStatusStates.Add(objCustomer);
                             await _poContext12.SaveChangesAsync();
 
 
@@ -2535,7 +2536,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
         } //ok
 
-        public async Task<IQueryable<ResponseData<string>>> CMExpenseItemAttachment07(ResponseData<ExpenseItemAttachment07> data, string triger,IFile file)
+        public async Task<IQueryable<ResponseData<string>>> CMExpenseItemAttachment07(ResponseData<ExpenseItemAttachment07> data, string triger, IFile file)
         {
 
             try
@@ -2550,48 +2551,51 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
                 //---------------------------------------------------------File remove old Files
-                //System.IO.DirectoryInfo di = new DirectoryInfo("FilesData/");
+                System.IO.DirectoryInfo di = new DirectoryInfo("FilesData/");
 
-                //foreach (FileInfo filed in di.GetFiles())
-                //{
-                //    filed.Delete();
-                //}
+                foreach (FileInfo filed in di.GetFiles())
+                {
+                    filed.Delete();
+                }
 
                 //---------------------------------------------------------File remove old Files
 
 
 
-                var FILENAME ="";
-                FileStream streamWriter;
+                var FILENAME = "";
+                 FileStream streamWriter;
                 var ext = "";
 
-                if (triger!="DELETE")
-                { 
-                
-
-                var filename = file.Name;
-                var dir = "";
-                 ext = Path.GetExtension(filename);
-                await using var stream = file.OpenReadStream();
-
-                 FILENAME = DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
-                 streamWriter = new FileStream("FilesData/" + FILENAME, FileMode.OpenOrCreate);
-
-                string From = streamWriter.Name;
-
-
-                await stream.CopyToAsync(streamWriter);
-
-                streamWriter.Close();
-
-                string To = "ftp://182.50.132.58/FileData/" + FILENAME;
-
-                using (var client = new WebClient())
+                if (triger != "DELETE")
                 {
-                    client.Credentials = new NetworkCredential("App", "Nexion@123");
-                    client.UploadFile(To, WebRequestMethods.Ftp.UploadFile, From);
 
-                }
+
+                    var filename = file.Name;
+                    var dir = "";
+                    ext = Path.GetExtension(filename);
+                    await using var stream = file.OpenReadStream();
+
+                    FILENAME = DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
+                    streamWriter = new FileStream("FilesData/" + FILENAME, FileMode.OpenOrCreate);
+
+                    string From = streamWriter.Name;
+
+
+                    await stream.CopyToAsync(streamWriter);
+
+                    streamWriter.Close();
+
+                    string To = "ftp://182.50.132.58/FileData/" + FILENAME;
+
+                    using (var client = new WebClient())
+                    {
+                        client.Credentials = new NetworkCredential("App", "Nexion@123");
+                        client.UploadFile(To, WebRequestMethods.Ftp.UploadFile, From);
+
+                    }
+
+
+
                 }
 
 
@@ -2610,25 +2614,25 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
                             objCustomer.ExpenseId = data1.ExpenseId;
-     objCustomer.Name = FILENAME;
-       objCustomer.ContentType = ext;
-                           // objCustomer.Data =
-      objCustomer.ImagDescription = data1.ImagDescription;
-        objCustomer.CreatedBy = data1.CreatedBy;
-      objCustomer.CreatedOn = data1.CreatedOn;
+                            objCustomer.Name = FILENAME;
+                            objCustomer.ContentType = ext;
+                            // objCustomer.Data =
+                            objCustomer.ImagDescription = data1.ImagDescription;
+                            objCustomer.CreatedBy = data1.CreatedBy;
+                            objCustomer.CreatedOn = data1.CreatedOn;
                             objCustomer.AttchmentId = 0;//data1.AttchmentId;
 
 
-        //objCustomer.ExpenseId = _poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max() + 1;
-        //objCustomer.ExpenseId = data1.ExpenseId;
-        //objCustomer.StatusId = data1.StatusId;
-        //objCustomer.CreatedOn = data1.CreatedOn;
-        //objCustomer.CreatedBy = data1.CreatedBy;
-        //objCustomer.UpdateOn = data1.UpdateOn;
-        //objCustomer.UpdateBy = data1.UpdateBy;
-        //objCustomer.Comments = data1.Comments;
-        //objCustomer.Rid = 0;//_poContext12.ExpenseStatusStates.Select(x => x.Rid).Max() + 1;
-        // objCustomer.Rid= data1.Rid;
+                            //objCustomer.ExpenseId = _poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max() + 1;
+                            //objCustomer.ExpenseId = data1.ExpenseId;
+                            //objCustomer.StatusId = data1.StatusId;
+                            //objCustomer.CreatedOn = data1.CreatedOn;
+                            //objCustomer.CreatedBy = data1.CreatedBy;
+                            //objCustomer.UpdateOn = data1.UpdateOn;
+                            //objCustomer.UpdateBy = data1.UpdateBy;
+                            //objCustomer.Comments = data1.Comments;
+                            //objCustomer.Rid = 0;//_poContext12.ExpenseStatusStates.Select(x => x.Rid).Max() + 1;
+                            // objCustomer.Rid= data1.Rid;
 
 
 
@@ -2642,19 +2646,19 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
-                          
+
 
                             //dir = "./"+;
 
-                      
 
-                            
+
+
 
 
 
                             //@"D:\PO.xlsx";//streamWriter.Name;
                             //string To = "ftp://199.102.48.4/"+ DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
-                           
+
 
 
 
@@ -2764,12 +2768,12 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                 responseDatas2.Add(dat);
                 return await Task.Run(() => responseDatas2.AsQueryable());
             }
-
+          
 
 
         } //ok
 
-      
+
 
         //===========================================================po Module--------------------------------------------------
 
@@ -2816,13 +2820,13 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.MuserId = data1.MuserId;
                             objCustomer.DeliveryMode = data1.DeliveryMode;
                             objCustomer.Id = _poContext12.TmPurchaseHeads.Select(x => x.Id).Max() + 1;
-        // objCustomer.Rid= data1.Rid;
+                            // objCustomer.Rid= data1.Rid;
 
 
 
 
 
-        _poContext12.TmPurchaseHeads.Add(objCustomer);
+                            _poContext12.TmPurchaseHeads.Add(objCustomer);
                             await _poContext12.SaveChangesAsync();
                             List<string> DAT = new List<string>();
                             var DATA = Convert.ToString(_poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max());
@@ -2970,19 +2974,19 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
                             objCustomer.PoId = data1.PoId;
-                             objCustomer.Description = data1.Description;
-                           objCustomer.Uom = data1.Uom;
+                            objCustomer.Description = data1.Description;
+                            objCustomer.Uom = data1.Uom;
                             objCustomer.Qty = data1.Qty;
-                           objCustomer.ListPrice = data1.ListPrice;
-                           objCustomer.Dis = data1.Dis;
-                           objCustomer.UnitPrice = data1.UnitPrice;
-                         objCustomer.NetPrice = data1.NetPrice;
-                           objCustomer.CreationDate = data1.CreationDate;
-                           objCustomer.CuserId = data1.CuserId;
-                          objCustomer.ModificationDate = data1.ModificationDate;
-                         objCustomer.MuserId = data1.MuserId;
+                            objCustomer.ListPrice = data1.ListPrice;
+                            objCustomer.Dis = data1.Dis;
+                            objCustomer.UnitPrice = data1.UnitPrice;
+                            objCustomer.NetPrice = data1.NetPrice;
+                            objCustomer.CreationDate = data1.CreationDate;
+                            objCustomer.CuserId = data1.CuserId;
+                            objCustomer.ModificationDate = data1.ModificationDate;
+                            objCustomer.MuserId = data1.MuserId;
                             objCustomer.Id = 0;// data1.Id;
-                          objCustomer.Catname = data1.Catname;
+                            objCustomer.Catname = data1.Catname;
                             //objCustomer.Id = _poContext12.TmPurchaseHeads.Select(x => x.Id).Max() + 1;
                             // objCustomer.Rid= data1.Rid;
 

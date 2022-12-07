@@ -1,14 +1,10 @@
-﻿using GraphQl.Api.Services;
-using GraphQl.Api.Services.IServices;
+﻿using GraphQl.Api.Services.IServices;
 using GraphQl.Api.Utility;
-using GraphQl.Api.Utility.Custom;
 using GraphQl.DATA.API.PO.Model;
-using GraphQL_HotChoclate_EFCore.Models;
 using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Resolvers;
 using HotChocolate.Types;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic.FileIO;
 using System;
@@ -16,7 +12,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Threading;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 
@@ -996,20 +993,57 @@ namespace GraphQL_HotChoclate_EFCore.Services
         }
 
 
-
+        [UsePaging]
+        [UseProjection]
         [UseFiltering]
         [UseSorting]
-        public Task<IQueryable<TmPurchaseHead2>> CMPOFetchdata([Service] poContext context)
+        //[UseDbContext(typeof(poContext))]
+        public IQueryable<TmPurchaseHead2> CMPOFetchdata([Service] poContext context)
         {
             try
             {
-                
+
+
+                //var personalaccesstoken = "whfkrdgcuh54btteb63xsz3gocq7hp2jjcgwlomk6gdk7bimkefa";
+
+                //using (HttpClient client = new HttpClient())
+                //{
+                //    client.DefaultRequestHeaders.Accept.Add(
+                //       new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
+                //        Convert.ToBase64String(
+                //            System.Text.ASCIIEncoding.ASCII.GetBytes(
+                //                string.Format("{0}:{1}", "", personalaccesstoken))));
+
+                //    using (HttpResponseMessage response = client.GetAsync(
+                //                 $"https://dev.azure.com/nexionautomation/NexionAutomationProjects/_apis/build/builds?api-version=5.0").Result)
+                //    {
+                //        response.EnsureSuccessStatusCode();
+                //        var  responseBody =  response.Content.ReadAsStream();
+                //        Console.WriteLine(responseBody);
+                //    }
+                //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 List<TmPurchaseHead2> tmUserMaster = context.TmPurchaseHeads2.OrderByDescending(x=>x.PoId).ToList();
 
 
                
-                return Task.Run(() => tmUserMaster.AsQueryable());
+                return  tmUserMaster.AsQueryable();
             }
             catch (Exception ex)
             {
