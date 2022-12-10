@@ -3113,6 +3113,164 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
         } //ok
 
+
+
+        public async Task<IQueryable<ResponseData<string>>> CmComplaintBoxHead(ResponseData<CmComplaintBoxHead> data, string triger)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+
+                if (triger == "INSERT")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+                        try
+                        {
+
+                            var data1 = (CmComplaintBoxHead)data.Detail.SingleOrDefault();
+                            CmComplaintBoxHead objCustomer = new CmComplaintBoxHead();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+
+                            //objCustomer.ExpenseId = _poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max() + 1;
+                            //objCustomer.ExpenseId = data1.ExpenseId;
+                            objCustomer.Description = data1.Description;
+                            objCustomer.CreatedOn = data1.CreatedOn;
+                            objCustomer.CreatedBy = data1.CreatedBy;
+                            objCustomer.UpdateOn = data1.UpdateOn;
+                            objCustomer.UpdateBy = data1.UpdateBy;
+                            objCustomer.Tokennumber = Guid.NewGuid().ToString().ToUpper();
+                            objCustomer.ExpenseId = 0;//_poContext12.ExpenseStatusStates.Select(x => x.Rid).Max() + 1;
+                                                // objCustomer.Rid= data1.Rid;
+
+                            
+
+
+
+        _poContext12.CmComplaintBoxHeads.Add(objCustomer);
+                            await _poContext12.SaveChangesAsync();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "INSERT");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+                    }
+
+                }
+                else if (triger == "UPDATE")
+                {
+                    using (var dbContextTransaction1 = _poContext12.Database.BeginTransaction())
+                    {
+
+                        try
+                        {
+
+
+
+
+                            var data1 = (CmComplaintBoxHead)data.Detail.SingleOrDefault();
+                            CmComplaintBoxHead objCustomer = new CmComplaintBoxHead();
+                            //objCustomer = (CMAdminSubModuleMaster)data.Detail.SingleOrDefault();
+
+                           
+
+
+                            //objCustomer.ExpenseId = data1.ExpenseId;
+                            objCustomer.Description = data1.Description;
+                            objCustomer.CreatedOn = data1.CreatedOn;
+                            objCustomer.CreatedBy = data1.CreatedBy;
+                            objCustomer.UpdateOn = data1.UpdateOn;
+                            objCustomer.UpdateBy = data1.UpdateBy;
+                            objCustomer.Tokennumber = data1.Tokennumber;
+                            objCustomer.ExpenseId = data1.ExpenseId;// _poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max() + 1;
+
+
+
+                            _poContext12.CmComplaintBoxHeads.Update(objCustomer);
+                            _poContext12.SaveChanges();
+
+
+                            dbContextTransaction1.Commit();
+                            ResponseData<string> dat12 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "UPDATE");
+                            responseDatas2.Add(dat12);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction1.Rollback();
+
+
+                            ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                            responseDatas2.Add(dat);
+                            return await Task.Run(() => responseDatas2.AsQueryable());
+
+                        }
+
+
+                    }
+                }
+                else if (triger == "DELETE")
+                {
+
+                    var data1 = (CmComplaintBoxHead)data.Detail.SingleOrDefault();
+
+                    CmComplaintBoxHead objCustomer = new CmComplaintBoxHead();
+
+                    objCustomer.ExpenseId = Convert.ToInt32(data1.ExpenseId);
+                    //objCustomer.Rid = 0;
+
+
+                    _poContext12.CmComplaintBoxHeads.Remove(objCustomer);
+
+
+                    await _poContext12.SaveChangesAsync();
+                    //dbContextTransaction.Commit();
+                    //List<string> tmUserMaster = _poContext12.CMAdminModuleMasters.Select(a => a).ToList();
+                    ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "DELETE");
+                    responseDatas2.Add(dat);
+                    return await Task.Run(() => responseDatas2.AsQueryable());
+                }
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: "Data Not (" + triger + ")");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        } //ok
+
+
+
+
+
+
         //------------------------------------------------------End Po---------------------------------------------
 
 

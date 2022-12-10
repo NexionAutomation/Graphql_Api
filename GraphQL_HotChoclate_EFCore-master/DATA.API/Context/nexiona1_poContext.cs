@@ -89,7 +89,7 @@ namespace GraphQl.DATA.API.PO.Model
         public virtual DbSet<CMAdminSubModuleMaster> CMAdminSubModuleMasters { get; set; }
         public virtual DbSet<CMWebUserRightsMaster> CMWebUserRightsMasters { get; set; }
         public virtual DbSet<CMAdminModuleMaster> CMAdminModuleMasters { get; set; }
-        
+        public virtual DbSet<CmComplaintBoxHead> CmComplaintBoxHeads { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -2272,6 +2272,28 @@ namespace GraphQl.DATA.API.PO.Model
                 entity.Property(e => e.UserName)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+            });
+
+
+            modelBuilder.Entity<CmComplaintBoxHead>(entity =>
+            {
+                //entity.HasNoKey();
+
+                entity.ToTable("CM_ComplaintBoxHead");
+
+                entity.Property(e => e.CreatedOn).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.Description).IsUnicode(false);
+
+                entity.Property(e => e.ExpenseId).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(80)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tokennumber).IsUnicode(false);
+
+                entity.Property(e => e.UpdateOn).HasColumnType("smalldatetime");
             });
 
             OnModelCreatingPartial(modelBuilder);

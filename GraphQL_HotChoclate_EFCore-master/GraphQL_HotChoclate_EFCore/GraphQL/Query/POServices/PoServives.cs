@@ -104,8 +104,13 @@ namespace GraphQL_HotChoclate_EFCore.Services
                 return null;
             }
         }
+
+
+        [UsePaging]
+        [UseProjection]
         [UseFiltering]
         [UseSorting]
+        
         public Task<IQueryable<VwOutStationExpense>> POExpenseHeads([Service] poContext context)
         {
             try
@@ -650,6 +655,8 @@ namespace GraphQL_HotChoclate_EFCore.Services
                 return null;
             }
         }
+        [UsePaging]
+        [UseProjection]
         [UseFiltering]
         [UseSorting]
         public Task<IQueryable<TmPurchaseHead>> POTmPurchaseHeads([Service] poContext context)
@@ -993,6 +1000,7 @@ namespace GraphQL_HotChoclate_EFCore.Services
         }
 
 
+        
         [UsePaging]
         [UseProjection]
         [UseFiltering]
@@ -1039,7 +1047,7 @@ namespace GraphQL_HotChoclate_EFCore.Services
 
 
 
-                List<TmPurchaseHead2> tmUserMaster = context.TmPurchaseHeads2.OrderByDescending(x=>x.PoId).ToList();
+                List<TmPurchaseHead2> tmUserMaster = context.TmPurchaseHeads2.OrderByDescending(x=>x.DeliveryDate).ToList();
 
 
                
@@ -1702,7 +1710,20 @@ namespace GraphQL_HotChoclate_EFCore.Services
 
 
 
-
+        [UseFiltering]
+        [UseSorting]
+        public Task<IQueryable<CmComplaintBoxHead>> CmComplaintBoxHead([Service] poContext context)
+        {
+            try
+            {
+                List<CmComplaintBoxHead> tmUserMaster = context.CmComplaintBoxHeads.ToList();
+                return Task.Run(() => tmUserMaster.AsQueryable());
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
 
 
