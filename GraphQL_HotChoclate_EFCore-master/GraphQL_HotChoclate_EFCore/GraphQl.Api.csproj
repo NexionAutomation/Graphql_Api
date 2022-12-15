@@ -6,7 +6,7 @@
     <AssemblyName>GraphQlApi</AssemblyName>
     <RootNamespace>GraphQl.Api</RootNamespace>
     <UserSecretsId>0b763788-5dc2-4bad-a136-5a0a6d78641e</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+ 
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,9 +20,9 @@
     <PackageReference Include="HotChocolate.AspNetCore" Version="12.7.0" />
     <PackageReference Include="HotChocolate.AspNetCore.Playground" Version="10.5.5" />
     <PackageReference Include="HotChocolate.Data" Version="12.7.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -35,19 +35,13 @@
     <PackageReference Include="HotChocolate.Data.EntityFramework" Version="12.7.0" />
 
 
-    <!--<PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
-    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="graphiql" Version="1.2.0" />
-    <PackageReference Include="GraphQL" Version="2.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />-->
   </ItemGroup>
 
 
   <ItemGroup>
     <ProjectReference Include="..\DATA.API\GraphQl.DATA.API.csproj" />
   </ItemGroup>
+
+ 
 
 </Project>

@@ -2099,7 +2099,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.PeriodTo = data1.PeriodTo;
                             objCustomer.WorkOrderId = data1.WorkOrderId;
                             objCustomer.Location = data1.Location;
-                            objCustomer.CreatedOn = data1.CreatedOn;
+                            objCustomer.CreatedOn = DateTime.Now;//data1.CreatedOn;
                             objCustomer.CreatedBy = data1.CreatedBy;
                             objCustomer.UpdateOn = data1.UpdateOn;
                             objCustomer.UpdateBy = data1.UpdateBy;
@@ -2156,7 +2156,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.Location = data1.Location;
                             objCustomer.CreatedOn = data1.CreatedOn;
                             objCustomer.CreatedBy = data1.CreatedBy;
-                            objCustomer.UpdateOn = data1.UpdateOn;
+                            objCustomer.UpdateOn = DateTime.Now;
                             objCustomer.UpdateBy = data1.UpdateBy;
 
 
@@ -2412,7 +2412,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             //objCustomer.ExpenseId = _poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max() + 1;
                             objCustomer.ExpenseId = data1.ExpenseId;
                             objCustomer.StatusId = data1.StatusId;
-                            objCustomer.CreatedOn = data1.CreatedOn;
+                            objCustomer.CreatedOn = DateTime.Now;
                             objCustomer.CreatedBy = data1.CreatedBy;
                             objCustomer.UpdateOn = data1.UpdateOn;
                             objCustomer.UpdateBy = data1.UpdateBy;
@@ -2466,7 +2466,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.StatusId = data1.StatusId;
                             objCustomer.CreatedOn = data1.CreatedOn;
                             objCustomer.CreatedBy = data1.CreatedBy;
-                            objCustomer.UpdateOn = data1.UpdateOn;
+                            objCustomer.UpdateOn = DateTime.Now;
                             objCustomer.UpdateBy = data1.UpdateBy;
                             objCustomer.Comments = data1.Comments;
                             objCustomer.Rid = data1.Rid;// _poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max() + 1;
@@ -3140,7 +3140,8 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             //objCustomer.ExpenseId = _poContext12.ExpenseHeads.Select(x => x.ExpenseId).Max() + 1;
                             //objCustomer.ExpenseId = data1.ExpenseId;
                             objCustomer.Description = data1.Description;
-                            objCustomer.CreatedOn = data1.CreatedOn;
+                            objCustomer.CreatedOn = DateTime.Now;
+                            objCustomer.Status = data1.Status;
                             objCustomer.CreatedBy = data1.CreatedBy;
                             objCustomer.UpdateOn = data1.UpdateOn;
                             objCustomer.UpdateBy = data1.UpdateBy;
@@ -3195,6 +3196,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             //objCustomer.ExpenseId = data1.ExpenseId;
                             objCustomer.Description = data1.Description;
                             objCustomer.CreatedOn = data1.CreatedOn;
+                            objCustomer.Status = data1.Status;
                             objCustomer.CreatedBy = data1.CreatedBy;
                             objCustomer.UpdateOn = data1.UpdateOn;
                             objCustomer.UpdateBy = data1.UpdateBy;
