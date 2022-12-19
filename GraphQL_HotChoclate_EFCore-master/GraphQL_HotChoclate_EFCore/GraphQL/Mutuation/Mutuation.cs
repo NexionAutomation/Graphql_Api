@@ -2987,6 +2987,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.MuserId = data1.MuserId;
                             objCustomer.Id = 0;// data1.Id;
                             objCustomer.Catname = data1.Catname;
+                            objCustomer.make = data1.make;
                             //objCustomer.Id = _poContext12.TmPurchaseHeads.Select(x => x.Id).Max() + 1;
                             // objCustomer.Rid= data1.Rid;
 
@@ -3047,6 +3048,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                             objCustomer.MuserId = data1.MuserId;
                             objCustomer.Id = data1.Id;
                             objCustomer.Catname = data1.Catname;
+                            objCustomer.make = data1.make;
 
 
 

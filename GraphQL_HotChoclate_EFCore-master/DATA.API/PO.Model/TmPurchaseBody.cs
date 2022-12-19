@@ -23,6 +23,7 @@ namespace GraphQl.DATA.API.PO.Model
         [Key]
         public decimal Id { get; set; }
         public string Catname { get; set; }
+        public string make { get; set; }
     }
 
 

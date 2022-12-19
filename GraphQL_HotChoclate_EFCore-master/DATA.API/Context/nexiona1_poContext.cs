@@ -2144,7 +2144,7 @@ namespace GraphQl.DATA.API.PO.Model
             {
                 entity.HasNoKey();
 
-                entity.ToView("vw_OutStationExpense");
+                entity.ToView("vw_OutStationExpense_new");
 
                 entity.Property(e => e.CreatedBy).HasColumnName("createdBy");
 

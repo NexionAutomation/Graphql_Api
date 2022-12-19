@@ -22,5 +22,7 @@ namespace GraphQl.DATA.API.PO.Model
         public DateTime? CreatedOn { get; set; }
         public int? UpdatedBy { get; set; }
         public string UpdatedName { get; set; }
+        public int? Managerid { get; set; }
+       
     }
 }
