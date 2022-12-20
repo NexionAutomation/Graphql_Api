@@ -1194,47 +1194,47 @@ namespace GraphQL_HotChoclate_EFCore.Services
                           student.T7 = csvData.Rows[i][6].ToString(); 
                           student.T8 = csvData.Rows[i][7].ToString(); 
                           student.T9 = csvData.Rows[i][8].ToString(); 
-                         student.T10 = csvData.Rows[i][9].ToString();
-                         student.T11 = csvData.Rows[i][10].ToString(); 
-                         student.T12 = csvData.Rows[i][11].ToString(); 
-                         student.T13 = csvData.Rows[i][12].ToString(); 
-                         student.T14 = csvData.Rows[i][13].ToString(); 
-                         student.T15 = csvData.Rows[i][14].ToString(); 
-                         student.T16 = csvData.Rows[i][15].ToString(); 
-                         student.T17 = csvData.Rows[i][16].ToString(); 
-                         student.T18 = csvData.Rows[i][17].ToString(); 
-                         student.T19 = csvData.Rows[i][18].ToString(); 
-                         student.T20 = csvData.Rows[i][19].ToString(); 
-                         student.T21 = csvData.Rows[i][20].ToString(); 
-                         student.T22 = csvData.Rows[i][21].ToString(); 
-                         student.T23 = csvData.Rows[i][22].ToString(); 
-                         student.T24 = csvData.Rows[i][23].ToString(); 
-                         student.T25 = csvData.Rows[i][24].ToString(); 
-                         student.T26 = csvData.Rows[i][25].ToString(); 
-                         student.T27 = csvData.Rows[i][26].ToString(); 
-                         student.T28 = csvData.Rows[i][27].ToString(); 
-                         student.T29 = csvData.Rows[i][28].ToString(); 
-                         student.T30 = csvData.Rows[i][29].ToString(); 
-                         student.T31 = csvData.Rows[i][30].ToString(); 
-                         student.T32 = csvData.Rows[i][31].ToString(); 
-                         student.T33 = csvData.Rows[i][32].ToString(); 
-                         student.T34 = csvData.Rows[i][33].ToString(); 
-                         student.T35 = csvData.Rows[i][34].ToString(); 
-                         student.T36 = csvData.Rows[i][35].ToString(); 
-                         student.T37 = csvData.Rows[i][36].ToString(); 
-                         student.T38 = csvData.Rows[i][37].ToString(); 
-                         student.T39 = csvData.Rows[i][38].ToString(); 
-                         student.T40 = csvData.Rows[i][39].ToString(); 
-                         student.T41 = csvData.Rows[i][40].ToString(); 
-                         student.T42 = csvData.Rows[i][41].ToString(); 
-                         student.T43 = csvData.Rows[i][42].ToString(); 
-                         student.T44 = csvData.Rows[i][43].ToString(); 
-                         student.T45 = csvData.Rows[i][44].ToString(); 
-                         student.T46 = csvData.Rows[i][45].ToString(); 
-                         student.T47 = csvData.Rows[i][46].ToString(); 
-                         student.T48 = csvData.Rows[i][47].ToString(); 
-                         student.T49 = csvData.Rows[i][48].ToString(); 
-                         student.T50 = csvData.Rows[i][49].ToString(); 
+                         //student.T10 = csvData.Rows[i][9].ToString();
+                         //student.T11 = csvData.Rows[i][10].ToString(); 
+                         //student.T12 = csvData.Rows[i][11].ToString(); 
+                         //student.T13 = csvData.Rows[i][12].ToString(); 
+                         //student.T14 = csvData.Rows[i][13].ToString(); 
+                         //student.T15 = csvData.Rows[i][14].ToString(); 
+                         //student.T16 = csvData.Rows[i][15].ToString(); 
+                         //student.T17 = csvData.Rows[i][16].ToString(); 
+                         //student.T18 = csvData.Rows[i][17].ToString(); 
+                         //student.T19 = csvData.Rows[i][18].ToString(); 
+                         //student.T20 = csvData.Rows[i][19].ToString(); 
+                         //student.T21 = csvData.Rows[i][20].ToString(); 
+                         //student.T22 = csvData.Rows[i][21].ToString(); 
+                         //student.T23 = csvData.Rows[i][22].ToString(); 
+                         //student.T24 = csvData.Rows[i][23].ToString(); 
+                         //student.T25 = csvData.Rows[i][24].ToString(); 
+                         //student.T26 = csvData.Rows[i][25].ToString(); 
+                         //student.T27 = csvData.Rows[i][26].ToString(); 
+                         //student.T28 = csvData.Rows[i][27].ToString(); 
+                         //student.T29 = csvData.Rows[i][28].ToString(); 
+                         //student.T30 = csvData.Rows[i][29].ToString(); 
+                         //student.T31 = csvData.Rows[i][30].ToString(); 
+                         //student.T32 = csvData.Rows[i][31].ToString(); 
+                         //student.T33 = csvData.Rows[i][32].ToString(); 
+                         //student.T34 = csvData.Rows[i][33].ToString(); 
+                         //student.T35 = csvData.Rows[i][34].ToString(); 
+                         //student.T36 = csvData.Rows[i][35].ToString(); 
+                         //student.T37 = csvData.Rows[i][36].ToString(); 
+                         //student.T38 = csvData.Rows[i][37].ToString(); 
+                         //student.T39 = csvData.Rows[i][38].ToString(); 
+                         //student.T40 = csvData.Rows[i][39].ToString(); 
+                         //student.T41 = csvData.Rows[i][40].ToString(); 
+                         //student.T42 = csvData.Rows[i][41].ToString(); 
+                         //student.T43 = csvData.Rows[i][42].ToString(); 
+                         //student.T44 = csvData.Rows[i][43].ToString(); 
+                         //student.T45 = csvData.Rows[i][44].ToString(); 
+                         //student.T46 = csvData.Rows[i][45].ToString(); 
+                         //student.T47 = csvData.Rows[i][46].ToString(); 
+                         //student.T48 = csvData.Rows[i][47].ToString(); 
+                         //student.T49 = csvData.Rows[i][48].ToString(); 
+                         //student.T50 = csvData.Rows[i][49].ToString(); 
 
                       
 
@@ -1244,61 +1244,6 @@ namespace GraphQL_HotChoclate_EFCore.Services
                 }
 
 
-
-                //csvData
-
-
-            //var data=   studentList.ToLookup(a=>a.T3,a=>a).ToList();
-
-
-                //    data.ForEach(a => {
-
-
-                //        if(a.Key == "DAY")
-                //        {
-                //            data.ForEach(ab =>
-                //            {
-                //                day.Add(ab.Key);
-                //            });
-
-
-
-                //        }
-
-
-
-                //    });
-
-
-
-                //List<Attandance> dataatt = new List<Attandance>();
-                //foreach (var da in data)
-                //{
-
-
-                //    foreach (var dai in da)
-                //    {
-
-                //        if(da.Key=="")
-                //        {
-                //            dataatt.Add(new Attandance
-                //            {
-                //                Date=dai.
-
-                //            });
-                //        }
-                //        //dataatt.
-                //    }
-
-                //}
-
-
-
-
-
-                //List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
-                //ResponseData<string> dat = ResponseMSG<string>.Success<List<string>>(Detail:  null, Status: "success");
-                //responseDatas2.Add(dat);
                 return await Task.Run(() => studentList.AsQueryable());
             }
             catch (Exception ex)
