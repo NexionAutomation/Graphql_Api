@@ -9,6 +9,7 @@ using HotChocolate.Data;
 using HotChocolate.Resolvers;
 using HotChocolate.Types;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic.FileIO;
 using System;
@@ -18,6 +19,7 @@ using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -28,13 +30,21 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
         public readonly ILogger Logger12;
         public readonly ICRUD<ResponseData<TmUserMaster>, TmUserMaster> CURED12;
         public readonly poContext _poContext12;
+        private IConfiguration _configuration;
 
-        public PoUserMutation(poContext _poContext12)
+        public PoUserMutation(poContext _poContext12, IConfiguration iconfig)
         {
             this._poContext12 = _poContext12;
+            _configuration = iconfig;
         }
 
 
+
+      
+        //public ValuesController(IConfiguration iconfig)
+        //{
+            
+        //}
 
 
 
@@ -3273,6 +3283,80 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
 
 
+        public async Task<IQueryable<ResponseData<string>>> MailSend(mailSend data, string triger, IFile files)
+        {
+
+            try
+            {
+
+
+
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                //mailSend data1 = (mailSend)data.Detail.SingleOrDefault();
+                string remoteUri = "http://www.contoso.com/library/homepage/images/";
+                string fileName = "ms-banner.gif", myStringWebResource = null;
+                var data1 = (mailSend)data;
+                mailSend objCustomer = new mailSend();
+                WebClient myWebClient = new WebClient();
+                //ConfigurationManager.AppSettings["Foo"];
+
+                SmtpClient smtpClient = new SmtpClient();
+                NetworkCredential basicCredential = new NetworkCredential(_configuration.GetValue<string>("SMS:User"), _configuration.GetValue<string>("SMS:Password"));
+                MailMessage message = new MailMessage();
+             
+                MailAddress fromAddress = new MailAddress(_configuration.GetValue<string>("SMS:User"));
+
+                // setup up the host, increase the timeout to 5 minutes
+                smtpClient.Host = _configuration.GetValue<string>("SMS:Server");// MailConst.SmtpServer;
+                //smtpClient.UseDefaultCredentials = tr;
+                smtpClient.Credentials = basicCredential;
+                smtpClient.Timeout = (60 * 5 * 1000);
+                smtpClient.EnableSsl = true;
+                smtpClient.Port =Convert.ToInt32(_configuration.GetValue<string>("SMS:Port").ToString());
+
+                message.From = fromAddress;
+                message.Subject = data1.subject;
+                message.IsBodyHtml = true;
+                message.Body = data1.body;
+                message.To.Add(data1.TO);
+                message.CC.Add(data1.cc);
+
+
+
+                if (data1.attachmentFilename != null && data1.attachmentFilename != "")
+                {
+                   // myStringWebResource = remoteUri + fileName;
+                  // myWebClient.DownloadFile(myStringWebResource, fileName);
+                    //System.Net.Mail.Attachment attachment;
+                    //byte[] fileBytes = System.IO.File.ReadAllBytes(files);
+                    // attachment = new System.Net.Mail.Attachment(files);
+                    // message.Attachments.Add(new Attachment(attachment));
+                }
+                smtpClient.Send(message);
+
+
+
+                ResponseData<string> dat1 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "Mail Send Successfully");
+                responseDatas2.Add(dat1);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+
+            }
+            catch (Exception ex)
+            {
+                // dbContextTransaction.Rollback();
+                List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
+                ResponseData<string> dat = ResponseMSG<string>.Failed<List<string>>(Detail: null, Status: ex.Message.ToString());
+                responseDatas2.Add(dat);
+                return await Task.Run(() => responseDatas2.AsQueryable());
+            }
+
+
+
+        } //ok
+
+
+
+
 
 
         //------------------------------------------------------End Po---------------------------------------------
@@ -3304,7 +3388,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
         //            var filename1 = files.Name;
         //            var dir1 = "";
         //            ext = Path.GetExtension(filename1);
-        //            await using var stream1 = files.OpenReadStream();
+        //           await using var stream1 = files.OpenReadStream();
 
         //            FILENAME = DateTime.Now.ToString("ddMMyyyyhhmmss") + ext;
         //            streamWriter = new FileStream("FilesData/" + FILENAME, FileMode.OpenOrCreate);

@@ -1,5 +1,7 @@
 ﻿using GraphQL_HotChoclate_EFCore.Models;
 using GraphQL_HotChoclate_EFCore.Services;
+using HotChocolate;
+using HotChocolate.Subscriptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,15 @@ using System.Threading.Tasks;
 
 namespace GraphQL_HotChoclate_EFCore.GraphQL
 {
+
+
+    //public async string PublishBook2(string book, [Service] ITopicEventSender sender)
+    //{
+    //    await sender.SendAsync(book.Author, book);
+    //    await sender.SendAsync(book.Author, book);
+
+    //    // Omitted code for brevity
+    //}
     //public class Query
     //{
     //    public Book GetBook()

@@ -16,4 +16,14 @@ namespace GraphQl.DATA.API.PO.Model
         public DateTime? UpdateOn { get; set; }
         public int? UpdateBy { get; set; }
     }
+
+
+    public partial class mailSend
+    {
+        public string? TO { get; set; }
+        public string? cc { get; set; }
+        public string? subject { get; set; }
+        public string?  body { get; set; }
+        public string? attachmentFilename { get; set; }
+    }
 }
