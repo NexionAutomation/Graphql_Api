@@ -671,6 +671,15 @@ namespace GraphQL_HotChoclate_EFCore.Services
                 return null;
             }
         }
+
+
+       
+
+
+
+
+
+
         [UseFiltering]
         [UseSorting]
         public Task<IQueryable<TmStateMaster>> POTmStateMasters([Service] poContext context)
@@ -1058,6 +1067,34 @@ namespace GraphQL_HotChoclate_EFCore.Services
                 return null;
             }
         }
+
+
+
+        
+        [UseFiltering]
+        [UseSorting]
+        //UseProjection]
+        //[UseDbContext(typeof(poContext))]
+        public IQueryable<TmPurchaseHead2> CMPOFetchdata2([Service] poContext context)
+        {
+            try
+            {
+
+
+                List<TmPurchaseHead2> tmUserMaster = context.TmPurchaseHeads2.OrderByDescending(x => x.DeliveryDate).ToList();
+
+
+
+                return tmUserMaster.AsQueryable();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+
 
 
 

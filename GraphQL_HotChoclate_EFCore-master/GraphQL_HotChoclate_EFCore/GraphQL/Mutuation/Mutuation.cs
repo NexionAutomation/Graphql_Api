@@ -21,6 +21,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GraphQL_HotChoclate_EFCore.GraphQL
@@ -3289,15 +3290,17 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
             try
             {
 
-
+               
 
                 List<ResponseData<string>> responseDatas2 = new List<ResponseData<string>>();
                 //mailSend data1 = (mailSend)data.Detail.SingleOrDefault();
-                string remoteUri = "http://www.contoso.com/library/homepage/images/";
-                string fileName = "ms-banner.gif", myStringWebResource = null;
+                //string remoteUri = "http://www.contoso.com/library/homepage/images/";
+                //string fileName = "ms-banner.gif", myStringWebResource = null;
                 var data1 = (mailSend)data;
                 mailSend objCustomer = new mailSend();
-                WebClient myWebClient = new WebClient();
+                StringBuilder sb = new StringBuilder();
+                sb.Append(data.body);
+                //WebClient myWebClient = new WebClient();
                 //ConfigurationManager.AppSettings["Foo"];
 
                 SmtpClient smtpClient = new SmtpClient();
@@ -3308,7 +3311,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
 
                 // setup up the host, increase the timeout to 5 minutes
                 smtpClient.Host = _configuration.GetValue<string>("SMS:Server");// MailConst.SmtpServer;
-                //smtpClient.UseDefaultCredentials = tr;
+                //smtpClient.UseDefaultCredentials = true;
                 smtpClient.Credentials = basicCredential;
                 smtpClient.Timeout = (60 * 5 * 1000);
                 smtpClient.EnableSsl = true;
@@ -3317,10 +3320,12 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                 message.From = fromAddress;
                 message.Subject = data1.subject;
                 message.IsBodyHtml = true;
-                message.Body = data1.body;
+                message.Body = data.body;
                 message.To.Add(data1.TO);
+                if(data1.cc.Any())
+                { 
                 message.CC.Add(data1.cc);
-
+                }
 
 
                 if (data1.attachmentFilename != null && data1.attachmentFilename != "")
@@ -3334,7 +3339,7 @@ namespace GraphQL_HotChoclate_EFCore.GraphQL
                 }
                 smtpClient.Send(message);
 
-
+                
 
                 ResponseData<string> dat1 = ResponseMSG<string>.Success<List<string>>(Detail: null, Status: "Mail Send Successfully");
                 responseDatas2.Add(dat1);
